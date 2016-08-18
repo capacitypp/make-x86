@@ -16,6 +16,9 @@ make-isl-0.12.2/*
 cloog-0.18.1
 make-cloog-0.18.1/*
 !make-cloog-0.18.1/*.sh
+autoconf-2.64
+make-autoconf-2.64/*
+!make-autoconf-2.64/*.sh
 
 gcc-4.9.2
 make-gcc-4.9.2
