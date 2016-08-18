@@ -4,6 +4,9 @@ make-make-3.80/*
 gmp-6.1.1
 make-gmp-6.1.1/*
 !make-gmp-6.1.1/*.sh
+mpfr-3.1.4
+make-mpfr-3.1.4/*
+!make-mpfr-3.1.4/*.sh
 
 gcc-4.9.2
 make-gcc-4.9.2
