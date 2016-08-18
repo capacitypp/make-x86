@@ -36,3 +36,6 @@ libiconv-1.14
 ## bison
 bison-3.0.4
 
+## flex
+flex-2.6.0
+
