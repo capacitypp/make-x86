@@ -22,6 +22,9 @@ make-autoconf-2.64/*
 automake-1.11.1
 make-automake-1.11.1/*
 !make-automake-1.11.1/*.sh
+gperf-3.0.4
+make-gperf-3.0.4/*
+!make-gperf-3.0.4/*.sh
 
 gcc-4.9.2
 make-gcc-4.9.2

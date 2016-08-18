@@ -27,3 +27,6 @@ autoconf-2.64
 ## automake
 automake-1.11.1
 
+## gperf
+gperf-3.0.4
+
