@@ -10,6 +10,9 @@ make-mpfr-3.1.4/*
 mpc-1.0.3
 make-mpc-1.0.3/*
 !make-mpc-1.0.3/*.sh
+isl-0.12.2
+make-isl-0.12.2/*
+!make-isl-0.12.2/*.sh
 
 gcc-4.9.2
 make-gcc-4.9.2
