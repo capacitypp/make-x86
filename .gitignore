@@ -13,6 +13,9 @@ make-mpc-1.0.3/*
 isl-0.12.2
 make-isl-0.12.2/*
 !make-isl-0.12.2/*.sh
+cloog-0.18.1
+make-cloog-0.18.1/*
+!make-cloog-0.18.1/*.sh
 
 gcc-4.9.2
 make-gcc-4.9.2
