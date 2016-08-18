@@ -1,0 +1,7 @@
+make-3.80
+make-make-3.80/*
+!make-make-3.80/*.sh
+
+gcc-4.9.2
+make-gcc-4.9.2
+
