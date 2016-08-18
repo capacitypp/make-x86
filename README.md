@@ -30,3 +30,6 @@ automake-1.11.1
 ## gperf
 gperf-3.0.4
 
+## libiconv
+libiconv-1.14
+
