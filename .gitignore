@@ -19,6 +19,9 @@ make-cloog-0.18.1/*
 autoconf-2.64
 make-autoconf-2.64/*
 !make-autoconf-2.64/*.sh
+automake-1.11.1
+make-automake-1.11.1/*
+!make-automake-1.11.1/*.sh
 
 gcc-4.9.2
 make-gcc-4.9.2
