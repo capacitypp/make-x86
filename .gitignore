@@ -29,6 +29,9 @@ libiconv-1.14
 make-libiconv-1.14/*
 !make-libiconv-1.14/*.sh
 !make-libiconv-1.14/*.patch
+bison-3.0.4
+make-bison-3.0.4/*
+!make-bison-3.0.4/*.sh
 
 gcc-4.9.2
 make-gcc-4.9.2
@@ -38,4 +41,6 @@ dejagnu-1.4.4
 make-dejagnu-1.4.4
 guile-2.1.3
 make-guile-2.1.3
+flex-2.6.0/
+make-flex-2.6.0
 

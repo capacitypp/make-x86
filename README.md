@@ -33,3 +33,6 @@ gperf-3.0.4
 ## libiconv
 libiconv-1.14
 
+## bison
+bison-3.0.4
+
