@@ -1,7 +1,12 @@
 make-3.80
 make-make-3.80/*
 !make-make-3.80/*.sh
+gmp-6.1.1
+make-gmp-6.1.1/*
+!make-gmp-6.1.1/*.sh
 
 gcc-4.9.2
 make-gcc-4.9.2
+perl-5.6.1
+make-perl-5.6.1
 
