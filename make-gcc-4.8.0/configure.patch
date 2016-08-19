@@ -1,0 +1,57 @@
+--- configure	2016-08-19 17:15:58.266451798 +0900
++++ configure.new	2016-08-19 17:18:19.590447586 +0900
+@@ -1164,7 +1164,7 @@
+   -v | -verbose | --verbose | --verbos | --verbo | --verb)
+     verbose=yes ;;
+ 
+-  -version | --version | --versio | --versi | --vers | -V)
++  -version | --version | --versio | --versi | --vers)
+     ac_init_version=: ;;
+ 
+   -with-* | --with-*)
+@@ -4192,7 +4192,7 @@
+ $as_echo "$as_me:${as_lineno-$LINENO}: checking for C compiler version" >&5
+ set X $ac_compile
+ ac_compiler=$2
+-for ac_option in --version -v -V -qversion; do
++for ac_option in --version -v; do
+   { { ac_try="$ac_compiler $ac_option >&5"
+ case "(($ac_try" in
+   *\"* | *\`* | *\\*) ac_try_echo=\$ac_try;;
+@@ -4765,7 +4765,7 @@
+ $as_echo "$as_me:${as_lineno-$LINENO}: checking for C++ compiler version" >&5
+ set X $ac_compile
+ ac_compiler=$2
+-for ac_option in --version -v -V -qversion; do
++for ac_option in --version -v; do
+   { { ac_try="$ac_compiler $ac_option >&5"
+ case "(($ac_try" in
+   *\"* | *\`* | *\\*) ac_try_echo=\$ac_try;;
+@@ -5961,12 +5961,12 @@
+     islinc=
+   fi
+ 
+-  if test "${graphite_requested}" = yes \
+-    && test "x${isllibs}" = x \
+-    && test "x${islinc}" = x ; then
+-
+-    as_fn_error "Unable to find a usable ISL.  See config.log for details." "$LINENO" 5
+-  fi
++#  if test "${graphite_requested}" = yes \
++#    && test "x${isllibs}" = x \
++#    && test "x${islinc}" = x ; then
++#
++#    as_fn_error "Unable to find a usable ISL.  See config.log for details." "$LINENO" 5
++#  fi
+ 
+ 
+ 
+@@ -15131,7 +15131,7 @@
+   # Handling of the options.
+   -recheck | --recheck | --rechec | --reche | --rech | --rec | --re | --r)
+     ac_cs_recheck=: ;;
+-  --version | --versio | --versi | --vers | --ver | --ve | --v | -V )
++  --version | --versio | --versi | --vers | --ver | --ve | --v)
+     $as_echo "$ac_cs_version"; exit ;;
+   --debug | --debu | --deb | --de | --d | -d )
+     debug=: ;;

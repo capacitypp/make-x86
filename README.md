@@ -42,5 +42,6 @@ Linux debian 3.16.0-4-686-pae #1 SMP Debian 3.16.7-ckt25-2+deb8u3 (2016-07-02) i
 ### flex-2.6.0
 
 ## gcc
+### gcc-4.8.0
 ### gcc-4.9.2
 
