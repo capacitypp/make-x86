@@ -9,6 +9,6 @@ echo "PREFIX : "$PREFIX
 rm -r -f build
 mkdir -p build
 cd build
-../../$SRCDIRNAME/configure --prefix=$PREFIX | tee ../configure.txt | grep -i error
+../../$SRCDIRNAME/configure --prefix=$PREFIX -enable-cxx | tee ../configure.txt | grep -i error
 cd ..
 
