@@ -1,0 +1,1004 @@
+diff -ur gcc-4.7.2/configure gcc-4.7.2.new/configure
+--- gcc-4.7.2/configure	2016-08-20 07:45:54.545983179 +0900
++++ gcc-4.7.2.new/configure	2016-08-20 09:21:00.693813122 +0900
+@@ -1167,7 +1167,7 @@
+   -v | -verbose | --verbose | --verbos | --verbo | --verb)
+     verbose=yes ;;
+ 
+-  -version | --version | --versio | --versi | --vers | -V)
++  -version | --version | --versio | --versi | --vers)
+     ac_init_version=: ;;
+ 
+   -with-* | --with-*)
+@@ -4032,7 +4032,7 @@
+ $as_echo "$as_me:${as_lineno-$LINENO}: checking for C compiler version" >&5
+ set X $ac_compile
+ ac_compiler=$2
+-for ac_option in --version -v -V -qversion; do
++for ac_option in --version -v; do
+   { { ac_try="$ac_compiler $ac_option >&5"
+ case "(($ac_try" in
+   *\"* | *\`* | *\\*) ac_try_echo=\$ac_try;;
+@@ -4289,9 +4289,6 @@
+ int
+ main ()
+ {
+-#ifndef __GNUC__
+-       choke me
+-#endif
+ 
+   ;
+   return 0;
+@@ -4605,7 +4602,7 @@
+ $as_echo "$as_me:${as_lineno-$LINENO}: checking for C++ compiler version" >&5
+ set X $ac_compile
+ ac_compiler=$2
+-for ac_option in --version -v -V -qversion; do
++for ac_option in --version -v; do
+   { { ac_try="$ac_compiler $ac_option >&5"
+ case "(($ac_try" in
+   *\"* | *\`* | *\\*) ac_try_echo=\$ac_try;;
+@@ -4637,9 +4634,6 @@
+ int
+ main ()
+ {
+-#ifndef __GNUC__
+-       choke me
+-#endif
+ 
+   ;
+   return 0;
+@@ -5276,9 +5270,6 @@
+ 
+   #define GCC_GMP_VERSION_NUM(a,b,c) (((a) << 16L) | ((b) << 8) | (c))
+   #define GCC_GMP_VERSION GCC_GMP_VERSION_NUM(__GNU_MP_VERSION,__GNU_MP_VERSION_MINOR,__GNU_MP_VERSION_PATCHLEVEL)
+-  #if GCC_GMP_VERSION < GCC_GMP_VERSION_NUM(4,2,0)
+-  choke me
+-  #endif
+ 
+   ;
+   return 0;
+@@ -5294,9 +5285,6 @@
+ 
+   #define GCC_GMP_VERSION_NUM(a,b,c) (((a) << 16L) | ((b) << 8) | (c))
+   #define GCC_GMP_VERSION GCC_GMP_VERSION_NUM(__GNU_MP_VERSION,__GNU_MP_VERSION_MINOR,__GNU_MP_VERSION_PATCHLEVEL)
+-  #if GCC_GMP_VERSION < GCC_GMP_VERSION_NUM(4,3,2)
+-  choke me
+-  #endif
+ 
+   ;
+   return 0;
+@@ -5329,9 +5317,6 @@
+ main ()
+ {
+ 
+-    #if MPFR_VERSION < MPFR_VERSION_NUM(2,3,1)
+-    choke me
+-    #endif
+ 
+   ;
+   return 0;
+@@ -5346,9 +5331,6 @@
+ main ()
+ {
+ 
+-    #if MPFR_VERSION < MPFR_VERSION_NUM(2,4,2)
+-    choke me
+-    #endif
+ 
+   ;
+   return 0;
+@@ -5381,9 +5363,6 @@
+ main ()
+ {
+ 
+-    #if MPC_VERSION < MPC_VERSION_NUM(0,8,0)
+-    choke me
+-    #endif
+ 
+   ;
+   return 0;
+@@ -5397,9 +5376,6 @@
+ main ()
+ {
+ 
+-    #if MPC_VERSION < MPC_VERSION_NUM(0,8,1)
+-    choke me
+-    #endif
+ 
+   ;
+   return 0;
+@@ -5697,9 +5673,6 @@
+ main ()
+ {
+ 
+-    #if PPL_VERSION_MAJOR != 0 || PPL_VERSION_MINOR < 11
+-    choke me
+-    #endif
+ 
+   ;
+   return 0;
+@@ -5845,9 +5818,6 @@
+ int
+ main ()
+ {
+-#ifndef CLOOG_PPL_BACKEND
+-    choke me
+-   #endif
+   ;
+   return 0;
+ }
+@@ -5979,11 +5949,6 @@
+ int
+ main ()
+ {
+-#if CLOOG_VERSION_MAJOR != 0 \
+-    || CLOOG_VERSION_MINOR != 16 \
+-    || CLOOG_VERSION_REVISION < 1
+-    choke me
+-   #endif
+   ;
+   return 0;
+ }
+@@ -6009,11 +5974,6 @@
+ int
+ main ()
+ {
+-#if CLOOG_VERSION_MAJOR != 0 \
+-    || CLOOG_VERSION_MINOR != 15 \
+-    || CLOOG_VERSION_REVISION < 5
+-    choke me
+-   #endif
+   ;
+   return 0;
+ }
+@@ -6025,11 +5985,6 @@
+ int
+ main ()
+ {
+-#if CLOOG_VERSION_MAJOR != 0 \
+-    || CLOOG_VERSION_MINOR != 15 \
+-    || CLOOG_VERSION_REVISION < 9
+-    choke me
+-   #endif
+   ;
+   return 0;
+ }
+@@ -7819,21 +7774,22 @@
+ done
+ test -n "$MAKEINFO" || MAKEINFO="$MISSING makeinfo"
+ 
+-case " $build_configdirs " in
+-  *" texinfo "*) MAKEINFO='$$r/$(BUILD_SUBDIR)/texinfo/makeinfo/makeinfo' ;;
+-  *)
++#case " $build_configdirs " in
++#  *" texinfo "*) MAKEINFO='$$r/$(BUILD_SUBDIR)/texinfo/makeinfo/makeinfo' ;;
++#  *)
+ 
+     # For an installed makeinfo, we require it to be from texinfo 4.7 or
+     # higher, else we use the "missing" dummy.
+-    if ${MAKEINFO} --version \
+-       | egrep 'texinfo[^0-9]*(4\.([7-9]|[1-9][0-9])|[5-9]|[1-9][0-9])' >/dev/null 2>&1; then
+-      :
+-    else
+-      MAKEINFO="$MISSING makeinfo"
+-    fi
+-    ;;
++#    if ${MAKEINFO} --version \
++#       | egrep 'texinfo[^0-9]*(4\.([7-9]|[1-9][0-9])|[5-9]|[1-9][0-9])' >/dev/null 2>&1; then
++#      :
++#    else
++#      MAKEINFO="$MISSING makeinfo"
++#    fi
++#    ;;
+ 
+-esac
++#esac
++MAKEINFO="$MISSING makeinfo"
+ 
+ # FIXME: expect and dejagnu may become build tools?
+ 
+@@ -15115,7 +15071,7 @@
+   # Handling of the options.
+   -recheck | --recheck | --rechec | --reche | --rech | --rec | --re | --r)
+     ac_cs_recheck=: ;;
+-  --version | --versio | --versi | --vers | --ver | --ve | --v | -V )
++  --version | --versio | --versi | --vers | --ver | --ve | --v )
+     $as_echo "$ac_cs_version"; exit ;;
+   --debug | --debu | --deb | --de | --d | -d )
+     debug=: ;;
+diff -ur gcc-4.7.2/fixincludes/configure gcc-4.7.2.new/fixincludes/configure
+--- gcc-4.7.2/fixincludes/configure	2016-08-20 07:46:07.429982795 +0900
++++ gcc-4.7.2.new/fixincludes/configure	2016-08-20 09:54:32.893753154 +0900
+@@ -1005,7 +1005,7 @@
+   -v | -verbose | --verbose | --verbos | --verbo | --verb)
+     verbose=yes ;;
+ 
+-  -version | --version | --versio | --versi | --vers | -V)
++  -version | --version | --versio | --versi | --vers)
+     ac_init_version=: ;;
+ 
+   -with-* | --with-*)
+@@ -3570,7 +3570,7 @@
+ $as_echo "$as_me:${as_lineno-$LINENO}: checking for C compiler version" >&5
+ set X $ac_compile
+ ac_compiler=$2
+-for ac_option in --version -v -V -qversion; do
++for ac_option in --version -v; do
+   { { ac_try="$ac_compiler $ac_option >&5"
+ case "(($ac_try" in
+   *\"* | *\`* | *\\*) ac_try_echo=\$ac_try;;
+@@ -5957,7 +5957,7 @@
+   # Handling of the options.
+   -recheck | --recheck | --rechec | --reche | --rech | --rec | --re | --r)
+     ac_cs_recheck=: ;;
+-  --version | --versio | --versi | --vers | --ver | --ve | --v | -V )
++  --version | --versio | --versi | --vers | --ver | --ve | --v )
+     $as_echo "$ac_cs_version"; exit ;;
+   --debug | --debu | --deb | --de | --d | -d )
+     debug=: ;;
+diff -ur gcc-4.7.2/gcc/configure gcc-4.7.2.new/gcc/configure
+--- gcc-4.7.2/gcc/configure	2016-08-20 07:46:00.097983013 +0900
++++ gcc-4.7.2.new/gcc/configure	2016-08-20 09:57:28.949747907 +0900
+@@ -1268,7 +1268,7 @@
+   -v | -verbose | --verbose | --verbos | --verbo | --verb)
+     verbose=yes ;;
+ 
+-  -version | --version | --versio | --versi | --vers | -V)
++  -version | --version | --versio | --versi | --vers)
+     ac_init_version=: ;;
+ 
+   -with-* | --with-*)
+@@ -3788,7 +3788,7 @@
+ $as_echo "$as_me:${as_lineno-$LINENO}: checking for C compiler version" >&5
+ set X $ac_compile
+ ac_compiler=$2
+-for ac_option in --version -v -V -qversion; do
++for ac_option in --version -v; do
+   { { ac_try="$ac_compiler $ac_option >&5"
+ case "(($ac_try" in
+   *\"* | *\`* | *\\*) ac_try_echo=\$ac_try;;
+@@ -4490,7 +4490,7 @@
+ $as_echo "$as_me:${as_lineno-$LINENO}: checking for C++ compiler version" >&5
+ set X $ac_compile
+ ac_compiler=$2
+-for ac_option in --version -v -V -qversion; do
++for ac_option in --version -v; do
+   { { ac_try="$ac_compiler $ac_option >&5"
+ case "(($ac_try" in
+   *\"* | *\`* | *\\*) ac_try_echo=\$ac_try;;
+@@ -13518,7 +13518,7 @@
+ esac
+ 
+ # If we're using GNU nm, then use its standard symbol codes.
+-case `$NM -V 2>&1` in
++case `$NM --version 2>&1` in
+ *GNU* | *'with BFD'*)
+   symcode='[ABCDGIRSTW]' ;;
+ esac
+@@ -15235,7 +15235,7 @@
+ 	lt_prog_compiler_static='-qstaticlink'
+ 	;;
+       *)
+-	case `$CC -V 2>&1 | sed 5q` in
++	case `$CC --version 2>&1 | sed 5q` in
+ 	*Sun\ F* | *Sun*Fortran*)
+ 	  # Sun Fortran 8.3 passes all unrecognized flags to the linker
+ 	  lt_prog_compiler_pic='-KPIC'
+@@ -15828,7 +15828,7 @@
+ 	  compiler_needs_object=yes
+ 	  ;;
+ 	esac
+-	case `$CC -V 2>&1 | sed 5q` in
++	case `$CC --version 2>&1 | sed 5q` in
+ 	*Sun\ C*)			# Sun C 5.9
+ 	  whole_archive_flag_spec='${wl}--whole-archive`new_convenience=; for conv in $convenience\"\"; do test -z \"$conv\" || new_convenience=\"$new_convenience,$conv\"; done; func_echo_all \"$new_convenience\"` ${wl}--no-whole-archive'
+ 	  compiler_needs_object=yes
+@@ -15979,7 +15979,7 @@
+ 	# -C means demangle to AIX nm, but means don't demangle with GNU nm
+ 	# Also, AIX nm treats weak defined symbols like other global
+ 	# defined symbols, whereas GNU nm marks them as "W".
+-	if $NM -V 2>&1 | $GREP 'GNU' > /dev/null; then
++	if $NM --version 2>&1 | $GREP 'GNU' > /dev/null; then
+ 	  export_symbols_cmds='$NM -Bpg $libobjs $convenience | awk '\''{ if (((\$ 2 == "T") || (\$ 2 == "D") || (\$ 2 == "B") || (\$ 2 == "W")) && (substr(\$ 3,1,1) != ".")) { print \$ 3 } }'\'' | sort -u > $export_symbols'
+ 	else
+ 	  export_symbols_cmds='$NM -BCpg $libobjs $convenience | awk '\''{ if (((\$ 2 == "T") || (\$ 2 == "D") || (\$ 2 == "B")) && (substr(\$ 3,1,1) != ".")) { print \$ 3 } }'\'' | sort -u > $export_symbols'
+@@ -16508,7 +16508,7 @@
+ 	archive_expsym_cmds='echo "{ global:" > $lib.exp~cat $export_symbols | $SED -e "s/\(.*\)/\1;/" >> $lib.exp~echo "local: *; };" >> $lib.exp~
+ 	  $CC -shared ${wl}-z ${wl}text ${wl}-M ${wl}$lib.exp ${wl}-h ${wl}$soname -o $lib $libobjs $deplibs $compiler_flags~$RM $lib.exp'
+       else
+-	case `$CC -V 2>&1` in
++	case `$CC --version 2>&1` in
+ 	*"Compilers 5.0"*)
+ 	  wlarc=''
+ 	  archive_cmds='$LD -G${allow_undefined_flag} -h $soname -o $lib $libobjs $deplibs $linker_flags'
+@@ -19255,7 +19255,7 @@
+ 	    # version 8.0 and above of icpc choke on multiply defined symbols
+ 	    # if we add $predep_objects and $postdep_objects, however 7.1 and
+ 	    # earlier do not add the objects themselves.
+-	    case `$CC -V 2>&1` in
++	    case `$CC --version 2>&1` in
+ 	      *"Version 7."*)
+ 	        archive_cmds_CXX='$CC -shared $predep_objects $libobjs $deplibs $postdep_objects $compiler_flags ${wl}-soname $wl$soname -o $lib'
+ 		archive_expsym_cmds_CXX='$CC -shared $predep_objects $libobjs $deplibs $postdep_objects $compiler_flags ${wl}-soname $wl$soname ${wl}-retain-symbols-file $wl$export_symbols -o $lib'
+@@ -19276,7 +19276,7 @@
+ 	    ;;
+           pgCC* | pgcpp*)
+             # Portland Group C++ compiler
+-	    case `$CC -V` in
++	    case `$CC --version` in
+ 	    *pgCC\ [1-5].* | *pgcpp\ [1-5].*)
+ 	      prelink_cmds_CXX='tpldir=Template.dir~
+ 		rm -rf $tpldir~
+@@ -19338,7 +19338,7 @@
+ 	    fi
+ 	    ;;
+ 	  *)
+-	    case `$CC -V 2>&1 | sed 5q` in
++	    case `$CC --version 2>&1 | sed 5q` in
+ 	    *Sun\ C*)
+ 	      # Sun C++ 5.9
+ 	      no_undefined_flag_CXX=' -zdefs'
+@@ -19810,7 +19810,7 @@
+   ;;
+ 
+ linux*)
+-  case `$CC -V 2>&1 | sed 5q` in
++  case `$CC --version 2>&1 | sed 5q` in
+   *Sun\ C*)
+     # Sun C++ 5.9
+ 
+@@ -20099,7 +20099,7 @@
+ 	    lt_prog_compiler_static_CXX='-qstaticlink'
+ 	    ;;
+ 	  *)
+-	    case `$CC -V 2>&1 | sed 5q` in
++	    case `$CC --version 2>&1 | sed 5q` in
+ 	    *Sun\ C*)
+ 	      # Sun C++ 5.9
+ 	      lt_prog_compiler_pic_CXX='-KPIC'
+@@ -20464,7 +20464,7 @@
+     # -C means demangle to AIX nm, but means don't demangle with GNU nm
+     # Also, AIX nm treats weak defined symbols like other global defined
+     # symbols, whereas GNU nm marks them as "W".
+-    if $NM -V 2>&1 | $GREP 'GNU' > /dev/null; then
++    if $NM --version 2>&1 | $GREP 'GNU' > /dev/null; then
+       export_symbols_cmds_CXX='$NM -Bpg $libobjs $convenience | awk '\''{ if (((\$ 2 == "T") || (\$ 2 == "D") || (\$ 2 == "B") || (\$ 2 == "W")) && (substr(\$ 3,1,1) != ".")) { print \$ 3 } }'\'' | sort -u > $export_symbols'
+     else
+       export_symbols_cmds_CXX='$NM -BCpg $libobjs $convenience | awk '\''{ if (((\$ 2 == "T") || (\$ 2 == "D") || (\$ 2 == "B")) && (substr(\$ 3,1,1) != ".")) { print \$ 3 } }'\'' | sort -u > $export_symbols'
+@@ -22259,7 +22259,7 @@
+ 	#
+ 	# Don't reuse gcc_gv_sun_ld_vers_* in case a linker other than
+ 	# /usr/ccs/bin/ld has been configured.
+-	ld_ver=`$gcc_cv_ld -V 2>&1`
++	ld_ver=`$gcc_cv_ld --version 2>&1`
+ 	if echo "$ld_ver" | grep 'Solaris Link Editors' > /dev/null; then
+ 	  ld_vers=`echo $ld_ver | sed -n \
+ 	    -e 's,^.*: 5\.[0-9][0-9]*-\([0-9]\.[0-9][0-9]*\).*$,\1,p'`
+@@ -22398,7 +22398,7 @@
+       #
+       # ld: Software Generation Utilities - Solaris Link Editors: 5.11-1.1701:onnv-ab196087-6931056-03/25/10
+       #
+-      gcc_cv_sun_ld_ver=`/usr/ccs/bin/ld -V 2>&1`
++      gcc_cv_sun_ld_ver=`/usr/ccs/bin/ld --version 2>&1`
+       if echo "$gcc_cv_sun_ld_ver" | grep 'Solaris Link Editors' > /dev/null; then
+ 	gcc_cv_sun_ld_vers=`echo $gcc_cv_sun_ld_ver | sed -n \
+ 	  -e 's,^.*: 5\.[0-9][0-9]*-\([0-9]\.[0-9][0-9]*\).*$,\1,p'`
+@@ -26669,7 +26669,7 @@
+       gcc_cv_ld_sol2_emulation=yes
+     fi
+   elif test x$gcc_cv_ld != x; then
+-    if $gcc_cv_ld -V 2>/dev/null | sed -e '1,/Supported emulations/d;q' | \
++    if $gcc_cv_ld --version 2>/dev/null | sed -e '1,/Supported emulations/d;q' | \
+        grep _sol2 > /dev/null; then
+       gcc_cv_ld_sol2_emulation=yes
+     fi
+@@ -28074,7 +28074,7 @@
+   # Handling of the options.
+   -recheck | --recheck | --rechec | --reche | --rech | --rec | --re | --r)
+     ac_cs_recheck=: ;;
+-  --version | --versio | --versi | --vers | --ver | --ve | --v | -V )
++  --version | --versio | --versi | --vers | --ver | --ve | --v )
+     $as_echo "$ac_cs_version"; exit ;;
+   --debug | --debu | --deb | --de | --d | -d )
+     debug=: ;;
+diff -ur gcc-4.7.2/intl/configure gcc-4.7.2.new/intl/configure
+--- gcc-4.7.2/intl/configure	2016-08-20 07:45:54.661983175 +0900
++++ gcc-4.7.2.new/intl/configure	2016-08-20 09:54:57.109752433 +0900
+@@ -1031,7 +1031,7 @@
+   -v | -verbose | --verbose | --verbos | --verbo | --verb)
+     verbose=yes ;;
+ 
+-  -version | --version | --versio | --versi | --vers | -V)
++  -version | --version | --versio | --versi | --vers)
+     ac_init_version=: ;;
+ 
+   -with-* | --with-*)
+@@ -2938,7 +2938,7 @@
+ $as_echo "$as_me:${as_lineno-$LINENO}: checking for C compiler version" >&5
+ set X $ac_compile
+ ac_compiler=$2
+-for ac_option in --version -v -V -qversion; do
++for ac_option in --version -v; do
+   { { ac_try="$ac_compiler $ac_option >&5"
+ case "(($ac_try" in
+   *\"* | *\`* | *\\*) ac_try_echo=\$ac_try;;
+@@ -7183,7 +7183,7 @@
+   # Handling of the options.
+   -recheck | --recheck | --rechec | --reche | --rech | --rec | --re | --r)
+     ac_cs_recheck=: ;;
+-  --version | --versio | --versi | --vers | --ver | --ve | --v | -V )
++  --version | --versio | --versi | --vers | --ver | --ve | --v )
+     $as_echo "$ac_cs_version"; exit ;;
+   --debug | --debu | --deb | --de | --d | -d )
+     debug=: ;;
+diff -ur gcc-4.7.2/libdecnumber/configure gcc-4.7.2.new/libdecnumber/configure
+--- gcc-4.7.2/libdecnumber/configure	2016-08-20 07:45:59.345983036 +0900
++++ gcc-4.7.2.new/libdecnumber/configure	2016-08-20 09:55:26.925751544 +0900
+@@ -1011,7 +1011,7 @@
+   -v | -verbose | --verbose | --verbos | --verbo | --verb)
+     verbose=yes ;;
+ 
+-  -version | --version | --versio | --versi | --vers | -V)
++  -version | --version | --versio | --versi | --vers)
+     ac_init_version=: ;;
+ 
+   -with-* | --with-*)
+@@ -2560,7 +2560,7 @@
+ $as_echo "$as_me:${as_lineno-$LINENO}: checking for C compiler version" >&5
+ set X $ac_compile
+ ac_compiler=$2
+-for ac_option in --version -v -V -qversion; do
++for ac_option in --version -v; do
+   { { ac_try="$ac_compiler $ac_option >&5"
+ case "(($ac_try" in
+   *\"* | *\`* | *\\*) ac_try_echo=\$ac_try;;
+@@ -5499,7 +5499,7 @@
+   # Handling of the options.
+   -recheck | --recheck | --rechec | --reche | --rech | --rec | --re | --r)
+     ac_cs_recheck=: ;;
+-  --version | --versio | --versi | --vers | --ver | --ve | --v | -V )
++  --version | --versio | --versi | --vers | --ver | --ve | --v )
+     $as_echo "$ac_cs_version"; exit ;;
+   --debug | --debu | --deb | --de | --d | -d )
+     debug=: ;;
+diff -ur gcc-4.7.2/libffi/configure gcc-4.7.2.new/libffi/configure
+--- gcc-4.7.2/libffi/configure	2016-08-20 07:45:54.677983175 +0900
++++ gcc-4.7.2.new/libffi/configure	2016-08-20 09:52:45.889756343 +0900
+@@ -1138,7 +1138,7 @@
+   -v | -verbose | --verbose | --verbos | --verbo | --verb)
+     verbose=yes ;;
+ 
+-  -version | --version | --versio | --versi | --vers | -V)
++  -version | --version | --versio | --versi | --vers)
+     ac_init_version=: ;;
+ 
+   -with-* | --with-*)
+@@ -3398,7 +3398,7 @@
+ $as_echo "$as_me:${as_lineno-$LINENO}: checking for C compiler version" >&5
+ set X $ac_compile
+ ac_compiler=$2
+-for ac_option in --version -v -V -qversion; do
++for ac_option in --version -v; do
+   { { ac_try="$ac_compiler $ac_option >&5"
+ case "(($ac_try" in
+   *\"* | *\`* | *\\*) ac_try_echo=\$ac_try;;
+@@ -6003,7 +6003,7 @@
+ esac
+ 
+ # If we're using GNU nm, then use its standard symbol codes.
+-case `$NM -V 2>&1` in
++case `$NM --version 2>&1` in
+ *GNU* | *'with BFD'*)
+   symcode='[ABCDGIRSTW]' ;;
+ esac
+@@ -7991,7 +7991,7 @@
+ 	lt_prog_compiler_static='-qstaticlink'
+ 	;;
+       *)
+-	case `$CC -V 2>&1 | sed 5q` in
++	case `$CC --version 2>&1 | sed 5q` in
+ 	*Sun\ F* | *Sun*Fortran*)
+ 	  # Sun Fortran 8.3 passes all unrecognized flags to the linker
+ 	  lt_prog_compiler_pic='-KPIC'
+@@ -8584,7 +8584,7 @@
+ 	  compiler_needs_object=yes
+ 	  ;;
+ 	esac
+-	case `$CC -V 2>&1 | sed 5q` in
++	case `$CC --version 2>&1 | sed 5q` in
+ 	*Sun\ C*)			# Sun C 5.9
+ 	  whole_archive_flag_spec='${wl}--whole-archive`new_convenience=; for conv in $convenience\"\"; do test -z \"$conv\" || new_convenience=\"$new_convenience,$conv\"; done; func_echo_all \"$new_convenience\"` ${wl}--no-whole-archive'
+ 	  compiler_needs_object=yes
+@@ -8735,7 +8735,7 @@
+ 	# -C means demangle to AIX nm, but means don't demangle with GNU nm
+ 	# Also, AIX nm treats weak defined symbols like other global
+ 	# defined symbols, whereas GNU nm marks them as "W".
+-	if $NM -V 2>&1 | $GREP 'GNU' > /dev/null; then
++	if $NM --version 2>&1 | $GREP 'GNU' > /dev/null; then
+ 	  export_symbols_cmds='$NM -Bpg $libobjs $convenience | awk '\''{ if (((\$ 2 == "T") || (\$ 2 == "D") || (\$ 2 == "B") || (\$ 2 == "W")) && (substr(\$ 3,1,1) != ".")) { print \$ 3 } }'\'' | sort -u > $export_symbols'
+ 	else
+ 	  export_symbols_cmds='$NM -BCpg $libobjs $convenience | awk '\''{ if (((\$ 2 == "T") || (\$ 2 == "D") || (\$ 2 == "B")) && (substr(\$ 3,1,1) != ".")) { print \$ 3 } }'\'' | sort -u > $export_symbols'
+@@ -9264,7 +9264,7 @@
+ 	archive_expsym_cmds='echo "{ global:" > $lib.exp~cat $export_symbols | $SED -e "s/\(.*\)/\1;/" >> $lib.exp~echo "local: *; };" >> $lib.exp~
+ 	  $CC -shared ${wl}-z ${wl}text ${wl}-M ${wl}$lib.exp ${wl}-h ${wl}$soname -o $lib $libobjs $deplibs $compiler_flags~$RM $lib.exp'
+       else
+-	case `$CC -V 2>&1` in
++	case `$CC --version 2>&1` in
+ 	*"Compilers 5.0"*)
+ 	  wlarc=''
+ 	  archive_cmds='$LD -G${allow_undefined_flag} -h $soname -o $lib $libobjs $deplibs $linker_flags'
+@@ -13411,7 +13411,7 @@
+   # Handling of the options.
+   -recheck | --recheck | --rechec | --reche | --rech | --rec | --re | --r)
+     ac_cs_recheck=: ;;
+-  --version | --versio | --versi | --vers | --ver | --ve | --v | -V )
++  --version | --versio | --versi | --vers | --ver | --ve | --v )
+     $as_echo "$ac_cs_version"; exit ;;
+   --debug | --debu | --deb | --de | --d | -d )
+     debug=: ;;
+diff -ur gcc-4.7.2/libgcc/configure gcc-4.7.2.new/libgcc/configure
+--- gcc-4.7.2/libgcc/configure	2016-08-20 07:45:54.749983173 +0900
++++ gcc-4.7.2.new/libgcc/configure	2016-08-20 10:33:17.497683876 +0900
+@@ -1003,7 +1003,7 @@
+   -v | -verbose | --verbose | --verbos | --verbo | --verb)
+     verbose=yes ;;
+ 
+-  -version | --version | --versio | --versi | --vers | -V)
++  -version | --version | --versio | --versi | --vers)
+     ac_init_version=: ;;
+ 
+   -with-* | --with-*)
+@@ -2039,6 +2039,8 @@
+ ## Main body of script. ##
+ ## -------------------- ##
+ 
++LDFLAGS=$LDFLAGS" -L/usr/local/ppl/ppl-0.11/lib"
++
+ ac_ext=c
+ ac_cpp='$CPP $CPPFLAGS'
+ ac_compile='$CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
+@@ -3335,7 +3337,7 @@
+ $as_echo "$as_me:${as_lineno-$LINENO}: checking for C compiler version" >&5
+ set X $ac_compile
+ ac_compiler=$2
+-for ac_option in --version -v -V -qversion; do
++for ac_option in --version -v; do
+   { { ac_try="$ac_compiler $ac_option >&5"
+ case "(($ac_try" in
+   *\"* | *\`* | *\\*) ac_try_echo=\$ac_try;;
+@@ -5141,7 +5143,7 @@
+   # Handling of the options.
+   -recheck | --recheck | --rechec | --reche | --rech | --rec | --re | --r)
+     ac_cs_recheck=: ;;
+-  --version | --versio | --versi | --vers | --ver | --ve | --v | -V )
++  --version | --versio | --versi | --vers | --ver | --ve | --v )
+     $as_echo "$ac_cs_version"; exit ;;
+   --debug | --debu | --deb | --de | --d | -d )
+     debug=: ;;
+diff -ur gcc-4.7.2/libgfortran/configure gcc-4.7.2.new/libgfortran/configure
+--- gcc-4.7.2/libgfortran/configure	2016-08-20 07:46:07.309982799 +0900
++++ gcc-4.7.2.new/libgfortran/configure	2016-08-20 09:53:55.177754278 +0900
+@@ -1113,7 +1113,7 @@
+   -v | -verbose | --verbose | --verbos | --verbo | --verb)
+     verbose=yes ;;
+ 
+-  -version | --version | --versio | --versi | --vers | -V)
++  -version | --version | --versio | --versi | --vers)
+     ac_init_version=: ;;
+ 
+   -with-* | --with-*)
+@@ -3835,7 +3835,7 @@
+ $as_echo "$as_me:${as_lineno-$LINENO}: checking for C compiler version" >&5
+ set X $ac_compile
+ ac_compiler=$2
+-for ac_option in --version -v -V -qversion; do
++for ac_option in --version -v; do
+   { { ac_try="$ac_compiler $ac_option >&5"
+ case "(($ac_try" in
+   *\"* | *\`* | *\\*) ac_try_echo=\$ac_try;;
+@@ -5264,7 +5264,7 @@
+ $as_echo "$as_me:${as_lineno-$LINENO}: checking for C compiler version" >&5
+ set X $ac_compile
+ ac_compiler=$2
+-for ac_option in --version -v -V -qversion; do
++for ac_option in --version -v; do
+   { { ac_try="$ac_compiler $ac_option >&5"
+ case "(($ac_try" in
+   *\"* | *\`* | *\\*) ac_try_echo=\$ac_try;;
+@@ -7793,7 +7793,7 @@
+ esac
+ 
+ # If we're using GNU nm, then use its standard symbol codes.
+-case `$NM -V 2>&1` in
++case `$NM --version 2>&1` in
+ *GNU* | *'with BFD'*)
+   symcode='[ABCDGIRSTW]' ;;
+ esac
+@@ -9516,7 +9516,7 @@
+ 	lt_prog_compiler_static='-qstaticlink'
+ 	;;
+       *)
+-	case `$CC -V 2>&1 | sed 5q` in
++	case `$CC --version 2>&1 | sed 5q` in
+ 	*Sun\ F* | *Sun*Fortran*)
+ 	  # Sun Fortran 8.3 passes all unrecognized flags to the linker
+ 	  lt_prog_compiler_pic='-KPIC'
+@@ -10109,7 +10109,7 @@
+ 	  compiler_needs_object=yes
+ 	  ;;
+ 	esac
+-	case `$CC -V 2>&1 | sed 5q` in
++	case `$CC --version 2>&1 | sed 5q` in
+ 	*Sun\ C*)			# Sun C 5.9
+ 	  whole_archive_flag_spec='${wl}--whole-archive`new_convenience=; for conv in $convenience\"\"; do test -z \"$conv\" || new_convenience=\"$new_convenience,$conv\"; done; func_echo_all \"$new_convenience\"` ${wl}--no-whole-archive'
+ 	  compiler_needs_object=yes
+@@ -10260,7 +10260,7 @@
+ 	# -C means demangle to AIX nm, but means don't demangle with GNU nm
+ 	# Also, AIX nm treats weak defined symbols like other global
+ 	# defined symbols, whereas GNU nm marks them as "W".
+-	if $NM -V 2>&1 | $GREP 'GNU' > /dev/null; then
++	if $NM --version 2>&1 | $GREP 'GNU' > /dev/null; then
+ 	  export_symbols_cmds='$NM -Bpg $libobjs $convenience | awk '\''{ if (((\$ 2 == "T") || (\$ 2 == "D") || (\$ 2 == "B") || (\$ 2 == "W")) && (substr(\$ 3,1,1) != ".")) { print \$ 3 } }'\'' | sort -u > $export_symbols'
+ 	else
+ 	  export_symbols_cmds='$NM -BCpg $libobjs $convenience | awk '\''{ if (((\$ 2 == "T") || (\$ 2 == "D") || (\$ 2 == "B")) && (substr(\$ 3,1,1) != ".")) { print \$ 3 } }'\'' | sort -u > $export_symbols'
+@@ -10798,7 +10798,7 @@
+ 	archive_expsym_cmds='echo "{ global:" > $lib.exp~cat $export_symbols | $SED -e "s/\(.*\)/\1;/" >> $lib.exp~echo "local: *; };" >> $lib.exp~
+ 	  $CC -shared ${wl}-z ${wl}text ${wl}-M ${wl}$lib.exp ${wl}-h ${wl}$soname -o $lib $libobjs $deplibs $compiler_flags~$RM $lib.exp'
+       else
+-	case `$CC -V 2>&1` in
++	case `$CC --version 2>&1` in
+ 	*"Compilers 5.0"*)
+ 	  wlarc=''
+ 	  archive_cmds='$LD -G${allow_undefined_flag} -h $soname -o $lib $libobjs $deplibs $linker_flags'
+@@ -12799,7 +12799,7 @@
+ $as_echo "$as_me:${as_lineno-$LINENO}: checking for Fortran compiler version" >&5
+ set X $ac_compile
+ ac_compiler=$2
+-for ac_option in --version -v -V -qversion; do
++for ac_option in --version -v; do
+   { { ac_try="$ac_compiler $ac_option >&5"
+ case "(($ac_try" in
+   *\"* | *\`* | *\\*) ac_try_echo=\$ac_try;;
+@@ -13379,7 +13379,7 @@
+ 	lt_prog_compiler_static_FC='-qstaticlink'
+ 	;;
+       *)
+-	case `$CC -V 2>&1 | sed 5q` in
++	case `$CC --verion 2>&1 | sed 5q` in
+ 	*Sun\ F* | *Sun*Fortran*)
+ 	  # Sun Fortran 8.3 passes all unrecognized flags to the linker
+ 	  lt_prog_compiler_pic_FC='-KPIC'
+@@ -13957,7 +13957,7 @@
+ 	  compiler_needs_object_FC=yes
+ 	  ;;
+ 	esac
+-	case `$CC -V 2>&1 | sed 5q` in
++	case `$CC --version 2>&1 | sed 5q` in
+ 	*Sun\ C*)			# Sun C 5.9
+ 	  whole_archive_flag_spec_FC='${wl}--whole-archive`new_convenience=; for conv in $convenience\"\"; do test -z \"$conv\" || new_convenience=\"$new_convenience,$conv\"; done; func_echo_all \"$new_convenience\"` ${wl}--no-whole-archive'
+ 	  compiler_needs_object_FC=yes
+@@ -14108,7 +14108,7 @@
+ 	# -C means demangle to AIX nm, but means don't demangle with GNU nm
+ 	# Also, AIX nm treats weak defined symbols like other global
+ 	# defined symbols, whereas GNU nm marks them as "W".
+-	if $NM -V 2>&1 | $GREP 'GNU' > /dev/null; then
++	if $NM --version 2>&1 | $GREP 'GNU' > /dev/null; then
+ 	  export_symbols_cmds_FC='$NM -Bpg $libobjs $convenience | awk '\''{ if (((\$ 2 == "T") || (\$ 2 == "D") || (\$ 2 == "B") || (\$ 2 == "W")) && (substr(\$ 3,1,1) != ".")) { print \$ 3 } }'\'' | sort -u > $export_symbols'
+ 	else
+ 	  export_symbols_cmds_FC='$NM -BCpg $libobjs $convenience | awk '\''{ if (((\$ 2 == "T") || (\$ 2 == "D") || (\$ 2 == "B")) && (substr(\$ 3,1,1) != ".")) { print \$ 3 } }'\'' | sort -u > $export_symbols'
+@@ -14594,7 +14594,7 @@
+ 	archive_expsym_cmds_FC='echo "{ global:" > $lib.exp~cat $export_symbols | $SED -e "s/\(.*\)/\1;/" >> $lib.exp~echo "local: *; };" >> $lib.exp~
+ 	  $CC -shared ${wl}-z ${wl}text ${wl}-M ${wl}$lib.exp ${wl}-h ${wl}$soname -o $lib $libobjs $deplibs $compiler_flags~$RM $lib.exp'
+       else
+-	case `$CC -V 2>&1` in
++	case `$CC --version 2>&1` in
+ 	*"Compilers 5.0"*)
+ 	  wlarc=''
+ 	  archive_cmds_FC='$LD -G${allow_undefined_flag} -h $soname -o $lib $libobjs $deplibs $linker_flags'
+@@ -26476,7 +26476,7 @@
+   # Handling of the options.
+   -recheck | --recheck | --rechec | --reche | --rech | --rec | --re | --r)
+     ac_cs_recheck=: ;;
+-  --version | --versio | --versi | --vers | --ver | --ve | --v | -V )
++  --version | --versio | --versi | --vers | --ver | --ve | --v )
+     $as_echo "$ac_cs_version"; exit ;;
+   --debug | --debu | --deb | --de | --d | -d )
+     debug=: ;;
+diff -ur gcc-4.7.2/libstdc++-v3/configure gcc-4.7.2.new/libstdc++-v3/configure
+--- gcc-4.7.2/libstdc++-v3/configure	2016-08-20 07:46:08.833982753 +0900
++++ gcc-4.7.2.new/libstdc++-v3/configure	2016-08-20 09:58:34.709745948 +0900
+@@ -1218,7 +1218,7 @@
+   -v | -verbose | --verbose | --verbos | --verbo | --verb)
+     verbose=yes ;;
+ 
+-  -version | --version | --versio | --versi | --vers | -V)
++  -version | --version | --versio | --versi | --vers)
+     ac_init_version=: ;;
+ 
+   -with-* | --with-*)
+@@ -3849,7 +3849,7 @@
+ $as_echo "$as_me:${as_lineno-$LINENO}: checking for C compiler version" >&5
+ set X $ac_compile
+ ac_compiler=$2
+-for ac_option in --version -v -V -qversion; do
++for ac_option in --version -v; do
+   { { ac_try="$ac_compiler $ac_option >&5"
+ case "(($ac_try" in
+   *\"* | *\`* | *\\*) ac_try_echo=\$ac_try;;
+@@ -4451,7 +4451,7 @@
+ $as_echo "$as_me:${as_lineno-$LINENO}: checking for C++ compiler version" >&5
+ set X $ac_compile
+ ac_compiler=$2
+-for ac_option in --version -v -V -qversion; do
++for ac_option in --version -v; do
+   { { ac_try="$ac_compiler $ac_option >&5"
+ case "(($ac_try" in
+   *\"* | *\`* | *\\*) ac_try_echo=\$ac_try;;
+@@ -6842,7 +6842,7 @@
+ esac
+ 
+ # If we're using GNU nm, then use its standard symbol codes.
+-case `$NM -V 2>&1` in
++case `$NM --version 2>&1` in
+ *GNU* | *'with BFD'*)
+   symcode='[ABCDGIRSTW]' ;;
+ esac
+@@ -8696,7 +8696,7 @@
+ 	lt_prog_compiler_static='-qstaticlink'
+ 	;;
+       *)
+-	case `$CC -V 2>&1 | sed 5q` in
++	case `$CC --version 2>&1 | sed 5q` in
+ 	*Sun\ F* | *Sun*Fortran*)
+ 	  # Sun Fortran 8.3 passes all unrecognized flags to the linker
+ 	  lt_prog_compiler_pic='-KPIC'
+@@ -9289,7 +9289,7 @@
+ 	  compiler_needs_object=yes
+ 	  ;;
+ 	esac
+-	case `$CC -V 2>&1 | sed 5q` in
++	case `$CC --version 2>&1 | sed 5q` in
+ 	*Sun\ C*)			# Sun C 5.9
+ 	  whole_archive_flag_spec='${wl}--whole-archive`new_convenience=; for conv in $convenience\"\"; do test -z \"$conv\" || new_convenience=\"$new_convenience,$conv\"; done; func_echo_all \"$new_convenience\"` ${wl}--no-whole-archive'
+ 	  compiler_needs_object=yes
+@@ -9440,7 +9440,7 @@
+ 	# -C means demangle to AIX nm, but means don't demangle with GNU nm
+ 	# Also, AIX nm treats weak defined symbols like other global
+ 	# defined symbols, whereas GNU nm marks them as "W".
+-	if $NM -V 2>&1 | $GREP 'GNU' > /dev/null; then
++	if $NM --version 2>&1 | $GREP 'GNU' > /dev/null; then
+ 	  export_symbols_cmds='$NM -Bpg $libobjs $convenience | awk '\''{ if (((\$ 2 == "T") || (\$ 2 == "D") || (\$ 2 == "B") || (\$ 2 == "W")) && (substr(\$ 3,1,1) != ".")) { print \$ 3 } }'\'' | sort -u > $export_symbols'
+ 	else
+ 	  export_symbols_cmds='$NM -BCpg $libobjs $convenience | awk '\''{ if (((\$ 2 == "T") || (\$ 2 == "D") || (\$ 2 == "B")) && (substr(\$ 3,1,1) != ".")) { print \$ 3 } }'\'' | sort -u > $export_symbols'
+@@ -9978,7 +9978,7 @@
+ 	archive_expsym_cmds='echo "{ global:" > $lib.exp~cat $export_symbols | $SED -e "s/\(.*\)/\1;/" >> $lib.exp~echo "local: *; };" >> $lib.exp~
+ 	  $CC -shared ${wl}-z ${wl}text ${wl}-M ${wl}$lib.exp ${wl}-h ${wl}$soname -o $lib $libobjs $deplibs $compiler_flags~$RM $lib.exp'
+       else
+-	case `$CC -V 2>&1` in
++	case `$CC --version 2>&1` in
+ 	*"Compilers 5.0"*)
+ 	  wlarc=''
+ 	  archive_cmds='$LD -G${allow_undefined_flag} -h $soname -o $lib $libobjs $deplibs $linker_flags'
+@@ -12749,7 +12749,7 @@
+ 	    # version 8.0 and above of icpc choke on multiply defined symbols
+ 	    # if we add $predep_objects and $postdep_objects, however 7.1 and
+ 	    # earlier do not add the objects themselves.
+-	    case `$CC -V 2>&1` in
++	    case `$CC --version 2>&1` in
+ 	      *"Version 7."*)
+ 	        archive_cmds_CXX='$CC -shared $predep_objects $libobjs $deplibs $postdep_objects $compiler_flags ${wl}-soname $wl$soname -o $lib'
+ 		archive_expsym_cmds_CXX='$CC -shared $predep_objects $libobjs $deplibs $postdep_objects $compiler_flags ${wl}-soname $wl$soname ${wl}-retain-symbols-file $wl$export_symbols -o $lib'
+@@ -12770,7 +12770,7 @@
+ 	    ;;
+           pgCC* | pgcpp*)
+             # Portland Group C++ compiler
+-	    case `$CC -V` in
++	    case `$CC --version` in
+ 	    *pgCC\ [1-5].* | *pgcpp\ [1-5].*)
+ 	      prelink_cmds_CXX='tpldir=Template.dir~
+ 		rm -rf $tpldir~
+@@ -12832,7 +12832,7 @@
+ 	    fi
+ 	    ;;
+ 	  *)
+-	    case `$CC -V 2>&1 | sed 5q` in
++	    case `$CC --version 2>&1 | sed 5q` in
+ 	    *Sun\ C*)
+ 	      # Sun C++ 5.9
+ 	      no_undefined_flag_CXX=' -zdefs'
+@@ -13304,7 +13304,7 @@
+   ;;
+ 
+ linux*)
+-  case `$CC -V 2>&1 | sed 5q` in
++  case `$CC --version 2>&1 | sed 5q` in
+   *Sun\ C*)
+     # Sun C++ 5.9
+ 
+@@ -13593,7 +13593,7 @@
+ 	    lt_prog_compiler_static_CXX='-qstaticlink'
+ 	    ;;
+ 	  *)
+-	    case `$CC -V 2>&1 | sed 5q` in
++	    case `$CC --version 2>&1 | sed 5q` in
+ 	    *Sun\ C*)
+ 	      # Sun C++ 5.9
+ 	      lt_prog_compiler_pic_CXX='-KPIC'
+@@ -13958,7 +13958,7 @@
+     # -C means demangle to AIX nm, but means don't demangle with GNU nm
+     # Also, AIX nm treats weak defined symbols like other global defined
+     # symbols, whereas GNU nm marks them as "W".
+-    if $NM -V 2>&1 | $GREP 'GNU' > /dev/null; then
++    if $NM --version 2>&1 | $GREP 'GNU' > /dev/null; then
+       export_symbols_cmds_CXX='$NM -Bpg $libobjs $convenience | awk '\''{ if (((\$ 2 == "T") || (\$ 2 == "D") || (\$ 2 == "B") || (\$ 2 == "W")) && (substr(\$ 3,1,1) != ".")) { print \$ 3 } }'\'' | sort -u > $export_symbols'
+     else
+       export_symbols_cmds_CXX='$NM -BCpg $libobjs $convenience | awk '\''{ if (((\$ 2 == "T") || (\$ 2 == "D") || (\$ 2 == "B")) && (substr(\$ 3,1,1) != ".")) { print \$ 3 } }'\'' | sort -u > $export_symbols'
+@@ -67215,7 +67215,7 @@
+   # Handling of the options.
+   -recheck | --recheck | --rechec | --reche | --rech | --rec | --re | --r)
+     ac_cs_recheck=: ;;
+-  --version | --versio | --versi | --vers | --ver | --ve | --v | -V )
++  --version | --versio | --versi | --vers | --ver | --ve | --v )
+     $as_echo "$ac_cs_version"; exit ;;
+   --debug | --debu | --deb | --de | --d | -d )
+     debug=: ;;
+diff -ur gcc-4.7.2/lto-plugin/configure gcc-4.7.2.new/lto-plugin/configure
+--- gcc-4.7.2/lto-plugin/configure	2016-08-20 07:46:07.445982794 +0900
++++ gcc-4.7.2.new/lto-plugin/configure	2016-08-20 09:52:04.493757577 +0900
+@@ -1073,7 +1073,7 @@
+   -v | -verbose | --verbose | --verbos | --verbo | --verb)
+     verbose=yes ;;
+ 
+-  -version | --version | --versio | --versi | --vers | -V)
++  -version | --version | --versio | --versi | --vers)
+     ac_init_version=: ;;
+ 
+   -with-* | --with-*)
+@@ -3195,7 +3195,7 @@
+ $as_echo "$as_me:${as_lineno-$LINENO}: checking for C compiler version" >&5
+ set X $ac_compile
+ ac_compiler=$2
+-for ac_option in --version -v -V -qversion; do
++for ac_option in --version -v; do
+   { { ac_try="$ac_compiler $ac_option >&5"
+ case "(($ac_try" in
+   *\"* | *\`* | *\\*) ac_try_echo=\$ac_try;;
+@@ -5782,7 +5782,7 @@
+ esac
+ 
+ # If we're using GNU nm, then use its standard symbol codes.
+-case `$NM -V 2>&1` in
++case `$NM --version 2>&1` in
+ *GNU* | *'with BFD'*)
+   symcode='[ABCDGIRSTW]' ;;
+ esac
+@@ -7769,7 +7769,7 @@
+ 	lt_prog_compiler_static='-qstaticlink'
+ 	;;
+       *)
+-	case `$CC -V 2>&1 | sed 5q` in
++	case `$CC --version 2>&1 | sed 5q` in
+ 	*Sun\ F* | *Sun*Fortran*)
+ 	  # Sun Fortran 8.3 passes all unrecognized flags to the linker
+ 	  lt_prog_compiler_pic='-KPIC'
+@@ -8362,7 +8362,7 @@
+ 	  compiler_needs_object=yes
+ 	  ;;
+ 	esac
+-	case `$CC -V 2>&1 | sed 5q` in
++	case `$CC --version 2>&1 | sed 5q` in
+ 	*Sun\ C*)			# Sun C 5.9
+ 	  whole_archive_flag_spec='${wl}--whole-archive`new_convenience=; for conv in $convenience\"\"; do test -z \"$conv\" || new_convenience=\"$new_convenience,$conv\"; done; func_echo_all \"$new_convenience\"` ${wl}--no-whole-archive'
+ 	  compiler_needs_object=yes
+@@ -8513,7 +8513,7 @@
+ 	# -C means demangle to AIX nm, but means don't demangle with GNU nm
+ 	# Also, AIX nm treats weak defined symbols like other global
+ 	# defined symbols, whereas GNU nm marks them as "W".
+-	if $NM -V 2>&1 | $GREP 'GNU' > /dev/null; then
++	if $NM --version 2>&1 | $GREP 'GNU' > /dev/null; then
+ 	  export_symbols_cmds='$NM -Bpg $libobjs $convenience | awk '\''{ if (((\$ 2 == "T") || (\$ 2 == "D") || (\$ 2 == "B") || (\$ 2 == "W")) && (substr(\$ 3,1,1) != ".")) { print \$ 3 } }'\'' | sort -u > $export_symbols'
+ 	else
+ 	  export_symbols_cmds='$NM -BCpg $libobjs $convenience | awk '\''{ if (((\$ 2 == "T") || (\$ 2 == "D") || (\$ 2 == "B")) && (substr(\$ 3,1,1) != ".")) { print \$ 3 } }'\'' | sort -u > $export_symbols'
+@@ -9042,7 +9042,7 @@
+ 	archive_expsym_cmds='echo "{ global:" > $lib.exp~cat $export_symbols | $SED -e "s/\(.*\)/\1;/" >> $lib.exp~echo "local: *; };" >> $lib.exp~
+ 	  $CC -shared ${wl}-z ${wl}text ${wl}-M ${wl}$lib.exp ${wl}-h ${wl}$soname -o $lib $libobjs $deplibs $compiler_flags~$RM $lib.exp'
+       else
+-	case `$CC -V 2>&1` in
++	case `$CC --version 2>&1` in
+ 	*"Compilers 5.0"*)
+ 	  wlarc=''
+ 	  archive_cmds='$LD -G${allow_undefined_flag} -h $soname -o $lib $libobjs $deplibs $linker_flags'
+@@ -10781,7 +10781,7 @@
+ old_striplib=
+ { $as_echo "$as_me:${as_lineno-$LINENO}: checking whether stripping libraries is possible" >&5
+ $as_echo_n "checking whether stripping libraries is possible... " >&6; }
+-if test -n "$STRIP" && $STRIP -V 2>&1 | $GREP "GNU strip" >/dev/null; then
++if test -n "$STRIP" && $STRIP --version 2>&1 | $GREP "GNU strip" >/dev/null; then
+   test -z "$old_striplib" && old_striplib="$STRIP --strip-debug"
+   test -z "$striplib" && striplib="$STRIP --strip-unneeded"
+   { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+@@ -11607,7 +11607,7 @@
+   # Handling of the options.
+   -recheck | --recheck | --rechec | --reche | --rech | --rec | --re | --r)
+     ac_cs_recheck=: ;;
+-  --version | --versio | --versi | --vers | --ver | --ve | --v | -V )
++  --version | --versio | --versi | --vers | --ver | --ve | --v )
+     $as_echo "$ac_cs_version"; exit ;;
+   --debug | --debu | --deb | --de | --d | -d )
+     debug=: ;;
+diff -ur gcc-4.7.2/zlib/configure gcc-4.7.2.new/zlib/configure
+--- gcc-4.7.2/zlib/configure	2016-08-20 07:45:54.513983180 +0900
++++ gcc-4.7.2.new/zlib/configure	2016-08-20 12:13:58.389503843 +0900
+@@ -1073,7 +1073,7 @@
+   -v | -verbose | --verbose | --verbos | --verbo | --verb)
+     verbose=yes ;;
+ 
+-  -version | --version | --versio | --versi | --vers | -V)
++  -version | --version | --versio | --versi | --vers)
+     ac_init_version=: ;;
+ 
+   -with-* | --with-*)
+@@ -3214,7 +3214,7 @@
+ $as_echo "$as_me:${as_lineno-$LINENO}: checking for C compiler version" >&5
+ set X $ac_compile
+ ac_compiler=$2
+-for ac_option in --version -v -V -qversion; do
++for ac_option in --version -v; do
+   { { ac_try="$ac_compiler $ac_option >&5"
+ case "(($ac_try" in
+   *\"* | *\`* | *\\*) ac_try_echo=\$ac_try;;
+@@ -5590,7 +5590,7 @@
+ esac
+ 
+ # If we're using GNU nm, then use its standard symbol codes.
+-case `$NM -V 2>&1` in
++case `$NM --version 2>&1` in
+ *GNU* | *'with BFD'*)
+   symcode='[ABCDGIRSTW]' ;;
+ esac
+@@ -7584,7 +7584,7 @@
+ 	lt_prog_compiler_static='-qstaticlink'
+ 	;;
+       *)
+-	case `$CC -V 2>&1 | sed 5q` in
++	case `$CC --version 2>&1 | sed 5q` in
+ 	*Sun\ F* | *Sun*Fortran*)
+ 	  # Sun Fortran 8.3 passes all unrecognized flags to the linker
+ 	  lt_prog_compiler_pic='-KPIC'
+@@ -8177,7 +8177,7 @@
+ 	  compiler_needs_object=yes
+ 	  ;;
+ 	esac
+-	case `$CC -V 2>&1 | sed 5q` in
++	case `$CC --version 2>&1 | sed 5q` in
+ 	*Sun\ C*)			# Sun C 5.9
+ 	  whole_archive_flag_spec='${wl}--whole-archive`new_convenience=; for conv in $convenience\"\"; do test -z \"$conv\" || new_convenience=\"$new_convenience,$conv\"; done; func_echo_all \"$new_convenience\"` ${wl}--no-whole-archive'
+ 	  compiler_needs_object=yes
+@@ -8328,7 +8328,7 @@
+ 	# -C means demangle to AIX nm, but means don't demangle with GNU nm
+ 	# Also, AIX nm treats weak defined symbols like other global
+ 	# defined symbols, whereas GNU nm marks them as "W".
+-	if $NM -V 2>&1 | $GREP 'GNU' > /dev/null; then
++	if $NM --version 2>&1 | $GREP 'GNU' > /dev/null; then
+ 	  export_symbols_cmds='$NM -Bpg $libobjs $convenience | awk '\''{ if (((\$ 2 == "T") || (\$ 2 == "D") || (\$ 2 == "B") || (\$ 2 == "W")) && (substr(\$ 3,1,1) != ".")) { print \$ 3 } }'\'' | sort -u > $export_symbols'
+ 	else
+ 	  export_symbols_cmds='$NM -BCpg $libobjs $convenience | awk '\''{ if (((\$ 2 == "T") || (\$ 2 == "D") || (\$ 2 == "B")) && (substr(\$ 3,1,1) != ".")) { print \$ 3 } }'\'' | sort -u > $export_symbols'
+@@ -8866,7 +8866,7 @@
+ 	archive_expsym_cmds='echo "{ global:" > $lib.exp~cat $export_symbols | $SED -e "s/\(.*\)/\1;/" >> $lib.exp~echo "local: *; };" >> $lib.exp~
+ 	  $CC -shared ${wl}-z ${wl}text ${wl}-M ${wl}$lib.exp ${wl}-h ${wl}$soname -o $lib $libobjs $deplibs $compiler_flags~$RM $lib.exp'
+       else
+-	case `$CC -V 2>&1` in
++	case `$CC --version 2>&1` in
+ 	*"Compilers 5.0"*)
+ 	  wlarc=''
+ 	  archive_cmds='$LD -G${allow_undefined_flag} -h $soname -o $lib $libobjs $deplibs $linker_flags'
+@@ -11848,7 +11848,7 @@
+   # Handling of the options.
+   -recheck | --recheck | --rechec | --reche | --rech | --rec | --re | --r)
+     ac_cs_recheck=: ;;
+-  --version | --versio | --versi | --vers | --ver | --ve | --v | -V )
++  --version | --versio | --versi | --vers | --ver | --ve | --v )
+     $as_echo "$ac_cs_version"; exit ;;
+   --debug | --debu | --deb | --de | --d | -d )
+     debug=: ;;
