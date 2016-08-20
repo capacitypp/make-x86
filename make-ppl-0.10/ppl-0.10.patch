@@ -1,0 +1,1194 @@
+diff -ur ppl-0.10/configure ppl-0.10.new/configure
+--- ppl-0.10/configure	2008-11-04 18:37:00.000000000 +0900
++++ ppl-0.10.new/configure	2016-08-20 19:14:52.920751199 +0900
+@@ -1424,7 +1424,7 @@
+   -v | -verbose | --verbose | --verbos | --verbo | --verb)
+     verbose=yes ;;
+ 
+-  -version | --version | --versio | --versi | --vers | -V)
++  -version | --version | --versio | --versi | --vers)
+     ac_init_version=: ;;
+ 
+   -with-* | --with-*)
+@@ -3301,14 +3301,14 @@
+   ac_status=$?
+   $as_echo "$as_me:$LINENO: \$? = $ac_status" >&5
+   (exit $ac_status); }
+-{ (ac_try="$ac_compiler -V >&5"
++{ (ac_try="$ac_compiler --version >&5"
+ case "(($ac_try" in
+   *\"* | *\`* | *\\*) ac_try_echo=\$ac_try;;
+   *) ac_try_echo=$ac_try;;
+ esac
+ eval ac_try_echo="\"\$as_me:$LINENO: $ac_try_echo\""
+ $as_echo "$ac_try_echo") >&5
+-  (eval "$ac_compiler -V >&5") 2>&5
++  (eval "$ac_compiler --version >&5") 2>&5
+   ac_status=$?
+   $as_echo "$as_me:$LINENO: \$? = $ac_status" >&5
+   (exit $ac_status); }
+@@ -3578,9 +3578,6 @@
+ int
+ main ()
+ {
+-#ifndef __GNUC__
+-       choke me
+-#endif
+ 
+   ;
+   return 0;
+@@ -4102,9 +4099,6 @@
+ cat >>conftest.$ac_ext <<_ACEOF
+ /* end confdefs.h.  */
+ 
+-#ifndef __INTEL_COMPILER
+-choke me
+-#endif
+ 
+ _ACEOF
+ rm -f conftest.$ac_objext
+@@ -4284,14 +4278,14 @@
+   ac_status=$?
+   $as_echo "$as_me:$LINENO: \$? = $ac_status" >&5
+   (exit $ac_status); }
+-{ (ac_try="$ac_compiler -V >&5"
++{ (ac_try="$ac_compiler --version >&5"
+ case "(($ac_try" in
+   *\"* | *\`* | *\\*) ac_try_echo=\$ac_try;;
+   *) ac_try_echo=$ac_try;;
+ esac
+ eval ac_try_echo="\"\$as_me:$LINENO: $ac_try_echo\""
+ $as_echo "$ac_try_echo") >&5
+-  (eval "$ac_compiler -V >&5") 2>&5
++  (eval "$ac_compiler --version >&5") 2>&5
+   ac_status=$?
+   $as_echo "$as_me:$LINENO: \$? = $ac_status" >&5
+   (exit $ac_status); }
+@@ -4311,9 +4305,6 @@
+ int
+ main ()
+ {
+-#ifndef __GNUC__
+-       choke me
+-#endif
+ 
+   ;
+   return 0;
+@@ -4648,9 +4639,6 @@
+ cat >>conftest.$ac_ext <<_ACEOF
+ /* end confdefs.h.  */
+ 
+-#ifndef __INTEL_COMPILER
+-choke me
+-#endif
+ 
+ _ACEOF
+ rm -f conftest.$ac_objext
+@@ -4931,7 +4919,6 @@
+ #else
+ # include <assert.h>
+ #endif
+-		     Syntax error
+ _ACEOF
+ if { (ac_try="$ac_cpp conftest.$ac_ext"
+ case "(($ac_try" in
+@@ -4969,7 +4956,6 @@
+ cat confdefs.h >>conftest.$ac_ext
+ cat >>conftest.$ac_ext <<_ACEOF
+ /* end confdefs.h.  */
+-#include <ac_nonexistent.h>
+ _ACEOF
+ if { (ac_try="$ac_cpp conftest.$ac_ext"
+ case "(($ac_try" in
+@@ -5038,7 +5024,6 @@
+ #else
+ # include <assert.h>
+ #endif
+-		     Syntax error
+ _ACEOF
+ if { (ac_try="$ac_cpp conftest.$ac_ext"
+ case "(($ac_try" in
+@@ -5076,7 +5061,6 @@
+ cat confdefs.h >>conftest.$ac_ext
+ cat >>conftest.$ac_ext <<_ACEOF
+ /* end confdefs.h.  */
+-#include <ac_nonexistent.h>
+ _ACEOF
+ if { (ac_try="$ac_cpp conftest.$ac_ext"
+ case "(($ac_try" in
+@@ -5111,6 +5095,7 @@
+ done
+ # Because of `break', _AC_PREPROC_IFELSE's cleaning code was skipped.
+ rm -f conftest.err conftest.$ac_ext
++ac_preproc_ok=:
+ if $ac_preproc_ok; then
+   :
+ else
+@@ -5606,7 +5591,7 @@
+ then
+   if test x"$ICPC" = xyes
+   then
+-    OPT_FLAGS="$OPT_FLAGS -fp-model strict -fp-speculation off"
++    OPT_FLAGS="$OPT_FLAGS "
+   else
+     OPT_FLAGS="$OPT_FLAGS -frounding-math"
+   fi
+@@ -6208,9 +6193,9 @@
+ #ifdef __STDC__
+ # include <limits.h>
+ #else
++#define __STDC__
+ # include <assert.h>
+ #endif
+-		     Syntax error
+ _ACEOF
+ if { (ac_try="$ac_cpp conftest.$ac_ext"
+ case "(($ac_try" in
+@@ -6248,7 +6233,6 @@
+ cat confdefs.h >>conftest.$ac_ext
+ cat >>conftest.$ac_ext <<_ACEOF
+ /* end confdefs.h.  */
+-#include <ac_nonexistent.h>
+ _ACEOF
+ if { (ac_try="$ac_cpp conftest.$ac_ext"
+ case "(($ac_try" in
+@@ -6317,7 +6301,6 @@
+ #else
+ # include <assert.h>
+ #endif
+-		     Syntax error
+ _ACEOF
+ if { (ac_try="$ac_cpp conftest.$ac_ext"
+ case "(($ac_try" in
+@@ -6355,7 +6338,6 @@
+ cat confdefs.h >>conftest.$ac_ext
+ cat >>conftest.$ac_ext <<_ACEOF
+ /* end confdefs.h.  */
+-#include <ac_nonexistent.h>
+ _ACEOF
+ if { (ac_try="$ac_cpp conftest.$ac_ext"
+ case "(($ac_try" in
+@@ -6390,6 +6372,7 @@
+ done
+ # Because of `break', _AC_PREPROC_IFELSE's cleaning code was skipped.
+ rm -f conftest.err conftest.$ac_ext
++ac_preproc_ok=:
+ if $ac_preproc_ok; then
+   :
+ else
+@@ -6675,7 +6658,6 @@
+ cat >>conftest.$ac_ext <<_ACEOF
+ /* end confdefs.h.  */
+ #ifndef __APPLE_CC__
+-	       not a universal capable compiler
+ 	     #endif
+ 	     typedef int dummy;
+ 
+@@ -6769,7 +6751,6 @@
+ main ()
+ {
+ #if BYTE_ORDER != BIG_ENDIAN
+-		 not big endian
+ 		#endif
+ 
+   ;
+@@ -11131,7 +11112,7 @@
+ 
+ 
+ 
+-for ac_header in fenv.h ieeefp.h
++for ac_header in fenv.h
+ do
+ as_ac_Header=`$as_echo "ac_cv_header_$ac_header" | $as_tr_sh`
+ if { as_var=$as_ac_Header; eval "test \"\${$as_var+set}\" = set"; }; then
+@@ -11312,12 +11293,10 @@
+ 
+ # if !defined(FE_UPWARD) || !defined(FE_DOWNWARD)
+ 
+-  choke me
+ 
+ # elif defined(__arm__) \
+   && (!defined(PPL_ARM_CAN_CONTROL_FPU) || !PPL_ARM_CAN_CONTROL_FPU)
+ 
+-  choke me
+ 
+ #else
+ 
+@@ -11378,7 +11357,6 @@
+ 
+ #else
+ 
+-  choke me
+ 
+ #endif
+ 
+@@ -14422,10 +14400,6 @@
+ int
+ main ()
+ {
+-if (sizeof ((int_fast16_t)))
+-	  return 0;
+-  ;
+-  return 0;
+ }
+ _ACEOF
+ rm -f conftest.$ac_objext
+@@ -14524,10 +14498,6 @@
+ int
+ main ()
+ {
+-if (sizeof ((int_fast32_t)))
+-	  return 0;
+-  ;
+-  return 0;
+ }
+ _ACEOF
+ rm -f conftest.$ac_objext
+@@ -14626,10 +14596,6 @@
+ int
+ main ()
+ {
+-if (sizeof ((int_fast64_t)))
+-	  return 0;
+-  ;
+-  return 0;
+ }
+ _ACEOF
+ rm -f conftest.$ac_objext
+@@ -14728,10 +14694,6 @@
+ int
+ main ()
+ {
+-if (sizeof ((uint_fast16_t)))
+-	  return 0;
+-  ;
+-  return 0;
+ }
+ _ACEOF
+ rm -f conftest.$ac_objext
+@@ -14796,10 +14758,6 @@
+ int
+ main ()
+ {
+-if (sizeof (uint_fast32_t))
+-       return 0;
+-  ;
+-  return 0;
+ }
+ _ACEOF
+ rm -f conftest.$ac_objext
+@@ -14830,10 +14788,6 @@
+ int
+ main ()
+ {
+-if (sizeof ((uint_fast32_t)))
+-	  return 0;
+-  ;
+-  return 0;
+ }
+ _ACEOF
+ rm -f conftest.$ac_objext
+@@ -14898,10 +14852,6 @@
+ int
+ main ()
+ {
+-if (sizeof (uint_fast64_t))
+-       return 0;
+-  ;
+-  return 0;
+ }
+ _ACEOF
+ rm -f conftest.$ac_objext
+@@ -14932,10 +14882,6 @@
+ int
+ main ()
+ {
+-if (sizeof ((uint_fast64_t)))
+-	  return 0;
+-  ;
+-  return 0;
+ }
+ _ACEOF
+ rm -f conftest.$ac_objext
+@@ -16079,7 +16025,7 @@
+       || GMP_LIMB_BITS != mp_bits_per_limb) {
+     std::cerr
+       << "GMP header (gmp.h) and library (ligmp.*) bits-per-limb mismatch:\n"
+-      << "header gives " << __GMP_BITS_PER_MP_LIMB << ";\n"
++//      << "header gives " << __GMP_BITS_PER_MP_LIMB << ";\n"
+       << "library gives " << mp_bits_per_limb << ".\n"
+       << "This probably means you are on a bi-arch system and\n"
+       << "you are compiling with the wrong header or linking with\n"
+@@ -16613,7 +16559,7 @@
+ LIBS="$ac_save_LIBS"
+ 
+ gmp_library_option="$LTLIBGMPXX"
+-
++have_gmp=yes
+ if test x"$have_gmp" = xno
+ then
+   { { $as_echo "$as_me:$LINENO: error: Cannot find GMP version 4.1.3 or higher.
+@@ -17940,7 +17886,7 @@
+ 
+ if test x"`eval 'echo $ac_cv_path_JAVAH'`" != xno ; then
+   cat >conftest.$ac_ext <<_ACEOF
+-#include <jni.h>
++//#include <jni.h>
+ _ACEOF
+ if { (ac_try="$ac_cpp conftest.$ac_ext"
+ case "(($ac_try" in
+@@ -17972,7 +17918,7 @@
+     CPPFLAGS="$ac_save_CPPFLAGS $JNIFLAGS"
+ 
+     cat >conftest.$ac_ext <<_ACEOF
+-#include <jni.h>
++//#include <jni.h>
+ _ACEOF
+ if { (ac_try="$ac_cpp conftest.$ac_ext"
+ case "(($ac_try" in
+@@ -18029,14 +17975,16 @@
+ cat confdefs.h >>conftest.$ac_ext
+ cat >>conftest.$ac_ext <<_ACEOF
+ /* end confdefs.h.  */
+-#include <jni.h>
++//#include <jni.h>
+ 
+     int
+     main() {
++/*
+       if (sizeof(jlong) >= sizeof(void*))
+         return 0;
+       else
+         return 1;
++*/
+     }
+ 
+ _ACEOF
+@@ -19191,9 +19139,6 @@
+ 
+ int
+ main() {
+-#if !defined(PLVERSION) || PLVERSION < 50600
+-  choke me
+-#endif
+ 
+   ;
+   return 0;
+@@ -21335,7 +21280,7 @@
+ esac
+ 
+ # If we're using GNU nm, then use its standard symbol codes.
+-case `$NM -V 2>&1` in
++case `$NM --version 2>&1` in
+ *GNU* | *'with BFD'*)
+   symcode='[ABCDGIRSTW]' ;;
+ esac
+@@ -22568,14 +22513,14 @@
+   ac_status=$?
+   $as_echo "$as_me:$LINENO: \$? = $ac_status" >&5
+   (exit $ac_status); }
+-{ (ac_try="$ac_compiler -V >&5"
++{ (ac_try="$ac_compiler --version >&5"
+ case "(($ac_try" in
+   *\"* | *\`* | *\\*) ac_try_echo=\$ac_try;;
+   *) ac_try_echo=$ac_try;;
+ esac
+ eval ac_try_echo="\"\$as_me:$LINENO: $ac_try_echo\""
+ $as_echo "$ac_try_echo") >&5
+-  (eval "$ac_compiler -V >&5") 2>&5
++  (eval "$ac_compiler --version >&5") 2>&5
+   ac_status=$?
+   $as_echo "$as_me:$LINENO: \$? = $ac_status" >&5
+   (exit $ac_status); }
+@@ -22595,9 +22540,6 @@
+ int
+ main ()
+ {
+-#ifndef __GNUC__
+-       choke me
+-#endif
+ 
+   ;
+   return 0;
+@@ -22948,7 +22890,6 @@
+ #else
+ # include <assert.h>
+ #endif
+-		     Syntax error
+ _ACEOF
+ if { (ac_try="$ac_cpp conftest.$ac_ext"
+ case "(($ac_try" in
+@@ -22986,7 +22927,6 @@
+ cat confdefs.h >>conftest.$ac_ext
+ cat >>conftest.$ac_ext <<_ACEOF
+ /* end confdefs.h.  */
+-#include <ac_nonexistent.h>
+ _ACEOF
+ if { (ac_try="$ac_cpp conftest.$ac_ext"
+ case "(($ac_try" in
+@@ -23055,7 +22995,6 @@
+ #else
+ # include <assert.h>
+ #endif
+-		     Syntax error
+ _ACEOF
+ if { (ac_try="$ac_cpp conftest.$ac_ext"
+ case "(($ac_try" in
+@@ -23093,7 +23032,6 @@
+ cat confdefs.h >>conftest.$ac_ext
+ cat >>conftest.$ac_ext <<_ACEOF
+ /* end confdefs.h.  */
+-#include <ac_nonexistent.h>
+ _ACEOF
+ if { (ac_try="$ac_cpp conftest.$ac_ext"
+ case "(($ac_try" in
+@@ -23128,6 +23066,7 @@
+ done
+ # Because of `break', _AC_PREPROC_IFELSE's cleaning code was skipped.
+ rm -f conftest.err conftest.$ac_ext
++ac_preproc_ok=:
+ if $ac_preproc_ok; then
+   :
+ else
+@@ -23857,7 +23796,7 @@
+ 	lt_prog_compiler_static='-qstaticlink'
+ 	;;
+       *)
+-	case `$CC -V 2>&1 | sed 5q` in
++	case `$CC --version 2>&1 | sed 5q` in
+ 	*Sun\ C*)
+ 	  # Sun C 5.9
+ 	  lt_prog_compiler_pic='-KPIC'
+@@ -24411,7 +24350,7 @@
+ 	  tmp_sharedflag='-qmkshrobj'
+ 	  tmp_addflag= ;;
+ 	esac
+-	case `$CC -V 2>&1 | sed 5q` in
++	case `$CC --version 2>&1 | sed 5q` in
+ 	*Sun\ C*)			# Sun C 5.9
+ 	  whole_archive_flag_spec='${wl}--whole-archive`new_convenience=; for conv in $convenience\"\"; do test -z \"$conv\" || new_convenience=\"$new_convenience,$conv\"; done; $ECHO \"$new_convenience\"` ${wl}--no-whole-archive'
+ 	  compiler_needs_object=yes
+@@ -24560,7 +24499,7 @@
+       else
+ 	# If we're using GNU nm, then we don't want the "-C" option.
+ 	# -C means demangle to AIX nm, but means don't demangle with GNU nm
+-	if $NM -V 2>&1 | $GREP 'GNU' > /dev/null; then
++	if $NM --version 2>&1 | $GREP 'GNU' > /dev/null; then
+ 	  export_symbols_cmds='$NM -Bpg $libobjs $convenience | awk '\''{ if (((\$ 2 == "T") || (\$ 2 == "D") || (\$ 2 == "B")) && (substr(\$ 3,1,1) != ".")) { print \$ 3 } }'\'' | sort -u > $export_symbols'
+ 	else
+ 	  export_symbols_cmds='$NM -BCpg $libobjs $convenience | awk '\''{ if (((\$ 2 == "T") || (\$ 2 == "D") || (\$ 2 == "B")) && (substr(\$ 3,1,1) != ".")) { print \$ 3 } }'\'' | sort -u > $export_symbols'
+@@ -25133,7 +25072,7 @@
+ 	archive_expsym_cmds='echo "{ global:" > $lib.exp~cat $export_symbols | $SED -e "s/\(.*\)/\1;/" >> $lib.exp~echo "local: *; };" >> $lib.exp~
+ 	  $CC -shared ${wl}-z ${wl}text ${wl}-M ${wl}$lib.exp ${wl}-h ${wl}$soname -o $lib $libobjs $deplibs $compiler_flags~$RM $lib.exp'
+       else
+-	case `$CC -V 2>&1` in
++	case `$CC --version 2>&1` in
+ 	*"Compilers 5.0"*)
+ 	  wlarc=''
+ 	  archive_cmds='$LD -G${allow_undefined_flag} -h $soname -o $lib $libobjs $deplibs $linker_flags'
+@@ -26490,9 +26429,6 @@
+ /* The GNU C library defines this for functions which it implements
+     to always fail with ENOSYS.  Some functions are actually named
+     something starting with __ and the normal name is an alias.  */
+-#if defined __stub_shl_load || defined __stub___shl_load
+-choke me
+-#endif
+ 
+ int
+ main ()
+@@ -26646,9 +26582,6 @@
+ /* The GNU C library defines this for functions which it implements
+     to always fail with ENOSYS.  Some functions are actually named
+     something starting with __ and the normal name is an alias.  */
+-#if defined __stub_dlopen || defined __stub___dlopen
+-choke me
+-#endif
+ 
+ int
+ main ()
+@@ -28080,7 +28013,7 @@
+ 	    # version 8.0 and above of icpc choke on multiply defined symbols
+ 	    # if we add $predep_objects and $postdep_objects, however 7.1 and
+ 	    # earlier do not add the objects themselves.
+-	    case `$CC -V 2>&1` in
++	    case `$CC --version 2>&1` in
+ 	      *"Version 7."*)
+ 	        archive_cmds_CXX='$CC -shared $predep_objects $libobjs $deplibs $postdep_objects $compiler_flags ${wl}-soname $wl$soname -o $lib'
+ 		archive_expsym_cmds_CXX='$CC -shared $predep_objects $libobjs $deplibs $postdep_objects $compiler_flags ${wl}-soname $wl$soname ${wl}-retain-symbols-file $wl$export_symbols -o $lib'
+@@ -28101,7 +28034,7 @@
+ 	    ;;
+           pgCC* | pgcpp*)
+             # Portland Group C++ compiler
+-	    case `$CC -V` in
++	    case `$CC --version` in
+ 	    *pgCC\ [1-5]* | *pgcpp\ [1-5]*)
+ 	      prelink_cmds_CXX='tpldir=Template.dir~
+ 		rm -rf $tpldir~
+@@ -28163,7 +28096,7 @@
+ 	    fi
+ 	    ;;
+ 	  *)
+-	    case `$CC -V 2>&1 | sed 5q` in
++	    case `$CC --version 2>&1 | sed 5q` in
+ 	    *Sun\ C*)
+ 	      # Sun C++ 5.9
+ 	      no_undefined_flag_CXX=' -zdefs'
+@@ -28631,7 +28564,7 @@
+   ;;
+ 
+ linux*)
+-  case `$CC -V 2>&1 | sed 5q` in
++  case `$CC --version 2>&1 | sed 5q` in
+   *Sun\ C*)
+     # Sun C++ 5.9
+ 
+@@ -28915,7 +28848,7 @@
+ 	    lt_prog_compiler_static_CXX='-qstaticlink'
+ 	    ;;
+ 	  *)
+-	    case `$CC -V 2>&1 | sed 5q` in
++	    case `$CC --version 2>&1 | sed 5q` in
+ 	    *Sun\ C*)
+ 	      # Sun C++ 5.9
+ 	      lt_prog_compiler_pic_CXX='-KPIC'
+@@ -29278,7 +29211,7 @@
+   aix[4-9]*)
+     # If we're using GNU nm, then we don't want the "-C" option.
+     # -C means demangle to AIX nm, but means don't demangle with GNU nm
+-    if $NM -V 2>&1 | $GREP 'GNU' > /dev/null; then
++    if $NM --version 2>&1 | $GREP 'GNU' > /dev/null; then
+       export_symbols_cmds_CXX='$NM -Bpg $libobjs $convenience | awk '\''{ if (((\$ 2 == "T") || (\$ 2 == "D") || (\$ 2 == "B")) && (substr(\$ 3,1,1) != ".")) { print \$ 3 } }'\'' | sort -u > $export_symbols'
+     else
+       export_symbols_cmds_CXX='$NM -BCpg $libobjs $convenience | awk '\''{ if (((\$ 2 == "T") || (\$ 2 == "D") || (\$ 2 == "B")) && (substr(\$ 3,1,1) != ".")) { print \$ 3 } }'\'' | sort -u > $export_symbols'
+@@ -30288,156 +30221,7 @@
+ 
+ 
+ 
+-for ac_header in glpk.h glpk/glpk.h
+-do
+-as_ac_Header=`$as_echo "ac_cv_header_$ac_header" | $as_tr_sh`
+-if { as_var=$as_ac_Header; eval "test \"\${$as_var+set}\" = set"; }; then
+-  { $as_echo "$as_me:$LINENO: checking for $ac_header" >&5
+-$as_echo_n "checking for $ac_header... " >&6; }
+-if { as_var=$as_ac_Header; eval "test \"\${$as_var+set}\" = set"; }; then
+-  $as_echo_n "(cached) " >&6
+-fi
+-ac_res=`eval 'as_val=${'$as_ac_Header'}
+-		 $as_echo "$as_val"'`
+-	       { $as_echo "$as_me:$LINENO: result: $ac_res" >&5
+-$as_echo "$ac_res" >&6; }
+-else
+-  # Is the header compilable?
+-{ $as_echo "$as_me:$LINENO: checking $ac_header usability" >&5
+-$as_echo_n "checking $ac_header usability... " >&6; }
+-cat >conftest.$ac_ext <<_ACEOF
+-/* confdefs.h.  */
+-_ACEOF
+-cat confdefs.h >>conftest.$ac_ext
+-cat >>conftest.$ac_ext <<_ACEOF
+-/* end confdefs.h.  */
+-$ac_includes_default
+-#include <$ac_header>
+-_ACEOF
+-rm -f conftest.$ac_objext
+-if { (ac_try="$ac_compile"
+-case "(($ac_try" in
+-  *\"* | *\`* | *\\*) ac_try_echo=\$ac_try;;
+-  *) ac_try_echo=$ac_try;;
+-esac
+-eval ac_try_echo="\"\$as_me:$LINENO: $ac_try_echo\""
+-$as_echo "$ac_try_echo") >&5
+-  (eval "$ac_compile") 2>conftest.er1
+-  ac_status=$?
+-  grep -v '^ *+' conftest.er1 >conftest.err
+-  rm -f conftest.er1
+-  cat conftest.err >&5
+-  $as_echo "$as_me:$LINENO: \$? = $ac_status" >&5
+-  (exit $ac_status); } && {
+-	 test -z "$ac_c_werror_flag" ||
+-	 test ! -s conftest.err
+-       } && test -s conftest.$ac_objext; then
+-  ac_header_compiler=yes
+-else
+-  $as_echo "$as_me: failed program was:" >&5
+-sed 's/^/| /' conftest.$ac_ext >&5
+-
+-	ac_header_compiler=no
+-fi
+-
+-rm -f core conftest.err conftest.$ac_objext conftest.$ac_ext
+-{ $as_echo "$as_me:$LINENO: result: $ac_header_compiler" >&5
+-$as_echo "$ac_header_compiler" >&6; }
+-
+-# Is the header present?
+-{ $as_echo "$as_me:$LINENO: checking $ac_header presence" >&5
+-$as_echo_n "checking $ac_header presence... " >&6; }
+-cat >conftest.$ac_ext <<_ACEOF
+-/* confdefs.h.  */
+-_ACEOF
+-cat confdefs.h >>conftest.$ac_ext
+-cat >>conftest.$ac_ext <<_ACEOF
+-/* end confdefs.h.  */
+-#include <$ac_header>
+-_ACEOF
+-if { (ac_try="$ac_cpp conftest.$ac_ext"
+-case "(($ac_try" in
+-  *\"* | *\`* | *\\*) ac_try_echo=\$ac_try;;
+-  *) ac_try_echo=$ac_try;;
+-esac
+-eval ac_try_echo="\"\$as_me:$LINENO: $ac_try_echo\""
+-$as_echo "$ac_try_echo") >&5
+-  (eval "$ac_cpp conftest.$ac_ext") 2>conftest.er1
+-  ac_status=$?
+-  grep -v '^ *+' conftest.er1 >conftest.err
+-  rm -f conftest.er1
+-  cat conftest.err >&5
+-  $as_echo "$as_me:$LINENO: \$? = $ac_status" >&5
+-  (exit $ac_status); } >/dev/null && {
+-	 test -z "$ac_c_preproc_warn_flag$ac_c_werror_flag" ||
+-	 test ! -s conftest.err
+-       }; then
+-  ac_header_preproc=yes
+-else
+-  $as_echo "$as_me: failed program was:" >&5
+-sed 's/^/| /' conftest.$ac_ext >&5
+-
+-  ac_header_preproc=no
+-fi
+-
+-rm -f conftest.err conftest.$ac_ext
+-{ $as_echo "$as_me:$LINENO: result: $ac_header_preproc" >&5
+-$as_echo "$ac_header_preproc" >&6; }
+-
+-# So?  What about this header?
+-case $ac_header_compiler:$ac_header_preproc:$ac_c_preproc_warn_flag in
+-  yes:no: )
+-    { $as_echo "$as_me:$LINENO: WARNING: $ac_header: accepted by the compiler, rejected by the preprocessor!" >&5
+-$as_echo "$as_me: WARNING: $ac_header: accepted by the compiler, rejected by the preprocessor!" >&2;}
+-    { $as_echo "$as_me:$LINENO: WARNING: $ac_header: proceeding with the compiler's result" >&5
+-$as_echo "$as_me: WARNING: $ac_header: proceeding with the compiler's result" >&2;}
+-    ac_header_preproc=yes
+-    ;;
+-  no:yes:* )
+-    { $as_echo "$as_me:$LINENO: WARNING: $ac_header: present but cannot be compiled" >&5
+-$as_echo "$as_me: WARNING: $ac_header: present but cannot be compiled" >&2;}
+-    { $as_echo "$as_me:$LINENO: WARNING: $ac_header:     check for missing prerequisite headers?" >&5
+-$as_echo "$as_me: WARNING: $ac_header:     check for missing prerequisite headers?" >&2;}
+-    { $as_echo "$as_me:$LINENO: WARNING: $ac_header: see the Autoconf documentation" >&5
+-$as_echo "$as_me: WARNING: $ac_header: see the Autoconf documentation" >&2;}
+-    { $as_echo "$as_me:$LINENO: WARNING: $ac_header:     section \"Present But Cannot Be Compiled\"" >&5
+-$as_echo "$as_me: WARNING: $ac_header:     section \"Present But Cannot Be Compiled\"" >&2;}
+-    { $as_echo "$as_me:$LINENO: WARNING: $ac_header: proceeding with the preprocessor's result" >&5
+-$as_echo "$as_me: WARNING: $ac_header: proceeding with the preprocessor's result" >&2;}
+-    { $as_echo "$as_me:$LINENO: WARNING: $ac_header: in the future, the compiler will take precedence" >&5
+-$as_echo "$as_me: WARNING: $ac_header: in the future, the compiler will take precedence" >&2;}
+-    ( cat <<\_ASBOX
+-## ------------------------------------ ##
+-## Report this to ppl-devel@cs.unipr.it ##
+-## ------------------------------------ ##
+-_ASBOX
+-     ) | sed "s/^/$as_me: WARNING:     /" >&2
+-    ;;
+-esac
+-{ $as_echo "$as_me:$LINENO: checking for $ac_header" >&5
+-$as_echo_n "checking for $ac_header... " >&6; }
+-if { as_var=$as_ac_Header; eval "test \"\${$as_var+set}\" = set"; }; then
+-  $as_echo_n "(cached) " >&6
+-else
+-  eval "$as_ac_Header=\$ac_header_preproc"
+-fi
+-ac_res=`eval 'as_val=${'$as_ac_Header'}
+-		 $as_echo "$as_val"'`
+-	       { $as_echo "$as_me:$LINENO: result: $ac_res" >&5
+-$as_echo "$ac_res" >&6; }
+-
+-fi
+-as_val=`eval 'as_val=${'$as_ac_Header'}
+-		 $as_echo "$as_val"'`
+-   if test "x$as_val" = x""yes; then
+-  cat >>confdefs.h <<_ACEOF
+-#define `$as_echo "HAVE_$ac_header" | $as_tr_cpp` 1
+-_ACEOF
+- have_glpk=yes
+-fi
+-
+-done
+-
++have_glpk=no
+  if test x$have_glpk = xyes; then
+   HAVE_GLPK_TRUE=
+   HAVE_GLPK_FALSE='#'
+@@ -30556,9 +30340,6 @@
+ /* The GNU C library defines this for functions which it implements
+     to always fail with ENOSYS.  Some functions are actually named
+     something starting with __ and the normal name is an alias.  */
+-#if defined __stub__glp_lib_print_hook || defined __stub____glp_lib_print_hook
+-choke me
+-#endif
+ 
+ int
+ main ()
+@@ -30765,7 +30546,7 @@
+ 
+ 
+ 
+-for ac_header in fenv.h ieeefp.h getopt.h signal.h sys/resource.h sys/time.h sys/types.h unistd.h
++for ac_header in fenv.h getopt.h signal.h sys/resource.h sys/time.h sys/types.h unistd.h
+ do
+ as_ac_Header=`$as_echo "ac_cv_header_$ac_header" | $as_tr_sh`
+ if { as_var=$as_ac_Header; eval "test \"\${$as_var+set}\" = set"; }; then
+@@ -31081,9 +30862,6 @@
+ int
+ main ()
+ {
+-#ifndef RLIMIT_VMEM
+-  (void) RLIMIT_VMEM;
+-#endif
+ 
+   ;
+   return 0;
+@@ -31337,10 +31115,6 @@
+ int
+ main ()
+ {
+-if (sizeof ((timeval)))
+-	  return 0;
+-  ;
+-  return 0;
+ }
+ _ACEOF
+ rm -f conftest.$ac_objext
+@@ -31459,7 +31233,7 @@
+ #endif
+ #if HAVE_DECL_RLIMIT_VMEM
+   // Limit mapped memory (brk + mmap).
+-  LIMIT(RLIMIT_VMEM);
++  //LIMIT(RLIMIT_VMEM);
+ #endif
+ #if HAVE_DECL_RLIMIT_AS
+   // Limit virtual memory.
+@@ -32438,7 +32212,7 @@
+   # Handling of the options.
+   -recheck | --recheck | --rechec | --reche | --rech | --rec | --re | --r)
+     ac_cs_recheck=: ;;
+-  --version | --versio | --versi | --vers | --ver | --ve | --v | -V )
++  --version | --versio | --versi | --vers | --ver | --ve | --v )
+     $as_echo "$ac_cs_version"; exit ;;
+   --debug | --debu | --deb | --de | --d | -d )
+     debug=: ;;
+diff -ur ppl-0.10/Watchdog/configure ppl-0.10.new/Watchdog/configure
+--- ppl-0.10/Watchdog/configure	2008-11-04 18:36:58.000000000 +0900
++++ ppl-0.10.new/Watchdog/configure	2016-08-20 19:32:31.300719657 +0900
+@@ -1283,7 +1283,7 @@
+   -v | -verbose | --verbose | --verbos | --verbo | --verb)
+     verbose=yes ;;
+ 
+-  -version | --version | --versio | --versi | --vers | -V)
++  -version | --version | --versio | --versi | --vers)
+     ac_init_version=: ;;
+ 
+   -with-* | --with-*)
+@@ -3050,14 +3050,14 @@
+   ac_status=$?
+   $as_echo "$as_me:$LINENO: \$? = $ac_status" >&5
+   (exit $ac_status); }
+-{ (ac_try="$ac_compiler -V >&5"
++{ (ac_try="$ac_compiler --version >&5"
+ case "(($ac_try" in
+   *\"* | *\`* | *\\*) ac_try_echo=\$ac_try;;
+   *) ac_try_echo=$ac_try;;
+ esac
+ eval ac_try_echo="\"\$as_me:$LINENO: $ac_try_echo\""
+ $as_echo "$ac_try_echo") >&5
+-  (eval "$ac_compiler -V >&5") 2>&5
++  (eval "$ac_compiler --version >&5") 2>&5
+   ac_status=$?
+   $as_echo "$as_me:$LINENO: \$? = $ac_status" >&5
+   (exit $ac_status); }
+@@ -3327,9 +3327,6 @@
+ int
+ main ()
+ {
+-#ifndef __GNUC__
+-       choke me
+-#endif
+ 
+   ;
+   return 0;
+@@ -4273,14 +4270,14 @@
+   ac_status=$?
+   $as_echo "$as_me:$LINENO: \$? = $ac_status" >&5
+   (exit $ac_status); }
+-{ (ac_try="$ac_compiler -V >&5"
++{ (ac_try="$ac_compiler --version >&5"
+ case "(($ac_try" in
+   *\"* | *\`* | *\\*) ac_try_echo=\$ac_try;;
+   *) ac_try_echo=$ac_try;;
+ esac
+ eval ac_try_echo="\"\$as_me:$LINENO: $ac_try_echo\""
+ $as_echo "$ac_try_echo") >&5
+-  (eval "$ac_compiler -V >&5") 2>&5
++  (eval "$ac_compiler --version >&5") 2>&5
+   ac_status=$?
+   $as_echo "$as_me:$LINENO: \$? = $ac_status" >&5
+   (exit $ac_status); }
+@@ -4300,9 +4297,6 @@
+ int
+ main ()
+ {
+-#ifndef __GNUC__
+-       choke me
+-#endif
+ 
+   ;
+   return 0;
+@@ -4762,9 +4756,6 @@
+ cat >>conftest.$ac_ext <<_ACEOF
+ /* end confdefs.h.  */
+ 
+-#ifndef __INTEL_COMPILER
+-choke me
+-#endif
+ 
+ _ACEOF
+ rm -f conftest.$ac_objext
+@@ -4944,14 +4935,14 @@
+   ac_status=$?
+   $as_echo "$as_me:$LINENO: \$? = $ac_status" >&5
+   (exit $ac_status); }
+-{ (ac_try="$ac_compiler -V >&5"
++{ (ac_try="$ac_compiler --version >&5"
+ case "(($ac_try" in
+   *\"* | *\`* | *\\*) ac_try_echo=\$ac_try;;
+   *) ac_try_echo=$ac_try;;
+ esac
+ eval ac_try_echo="\"\$as_me:$LINENO: $ac_try_echo\""
+ $as_echo "$ac_try_echo") >&5
+-  (eval "$ac_compiler -V >&5") 2>&5
++  (eval "$ac_compiler --version >&5") 2>&5
+   ac_status=$?
+   $as_echo "$as_me:$LINENO: \$? = $ac_status" >&5
+   (exit $ac_status); }
+@@ -4971,9 +4962,6 @@
+ int
+ main ()
+ {
+-#ifndef __GNUC__
+-       choke me
+-#endif
+ 
+   ;
+   return 0;
+@@ -5308,9 +5296,6 @@
+ cat >>conftest.$ac_ext <<_ACEOF
+ /* end confdefs.h.  */
+ 
+-#ifndef __INTEL_COMPILER
+-choke me
+-#endif
+ 
+ _ACEOF
+ rm -f conftest.$ac_objext
+@@ -5457,7 +5442,6 @@
+ #else
+ # include <assert.h>
+ #endif
+-		     Syntax error
+ _ACEOF
+ if { (ac_try="$ac_cpp conftest.$ac_ext"
+ case "(($ac_try" in
+@@ -5495,7 +5479,6 @@
+ cat confdefs.h >>conftest.$ac_ext
+ cat >>conftest.$ac_ext <<_ACEOF
+ /* end confdefs.h.  */
+-#include <ac_nonexistent.h>
+ _ACEOF
+ if { (ac_try="$ac_cpp conftest.$ac_ext"
+ case "(($ac_try" in
+@@ -5564,7 +5547,6 @@
+ #else
+ # include <assert.h>
+ #endif
+-		     Syntax error
+ _ACEOF
+ if { (ac_try="$ac_cpp conftest.$ac_ext"
+ case "(($ac_try" in
+@@ -5602,7 +5584,6 @@
+ cat confdefs.h >>conftest.$ac_ext
+ cat >>conftest.$ac_ext <<_ACEOF
+ /* end confdefs.h.  */
+-#include <ac_nonexistent.h>
+ _ACEOF
+ if { (ac_try="$ac_cpp conftest.$ac_ext"
+ case "(($ac_try" in
+@@ -5637,6 +5618,7 @@
+ done
+ # Because of `break', _AC_PREPROC_IFELSE's cleaning code was skipped.
+ rm -f conftest.err conftest.$ac_ext
++ac_preproc_ok=:
+ if $ac_preproc_ok; then
+   :
+ else
+@@ -6398,9 +6380,9 @@
+ #ifdef __STDC__
+ # include <limits.h>
+ #else
++#define __STDC__
+ # include <assert.h>
+ #endif
+-		     Syntax error
+ _ACEOF
+ if { (ac_try="$ac_cpp conftest.$ac_ext"
+ case "(($ac_try" in
+@@ -6438,7 +6420,6 @@
+ cat confdefs.h >>conftest.$ac_ext
+ cat >>conftest.$ac_ext <<_ACEOF
+ /* end confdefs.h.  */
+-#include <ac_nonexistent.h>
+ _ACEOF
+ if { (ac_try="$ac_cpp conftest.$ac_ext"
+ case "(($ac_try" in
+@@ -6507,7 +6488,6 @@
+ #else
+ # include <assert.h>
+ #endif
+-		     Syntax error
+ _ACEOF
+ if { (ac_try="$ac_cpp conftest.$ac_ext"
+ case "(($ac_try" in
+@@ -6545,7 +6525,6 @@
+ cat confdefs.h >>conftest.$ac_ext
+ cat >>conftest.$ac_ext <<_ACEOF
+ /* end confdefs.h.  */
+-#include <ac_nonexistent.h>
+ _ACEOF
+ if { (ac_try="$ac_cpp conftest.$ac_ext"
+ case "(($ac_try" in
+@@ -6580,6 +6559,7 @@
+ done
+ # Because of `break', _AC_PREPROC_IFELSE's cleaning code was skipped.
+ rm -f conftest.err conftest.$ac_ext
++ac_preproc_ok=:
+ if $ac_preproc_ok; then
+   :
+ else
+@@ -7148,14 +7128,10 @@
+ cat confdefs.h >>conftest.$ac_ext
+ cat >>conftest.$ac_ext <<_ACEOF
+ /* end confdefs.h.  */
+-#include <cstdlib>
+ 
+ int
+ main ()
+ {
+-#ifndef getenv
+-  (void) getenv;
+-#endif
+ 
+   ;
+   return 0;
+@@ -7260,9 +7236,6 @@
+ /* The GNU C library defines this for functions which it implements
+     to always fail with ENOSYS.  Some functions are actually named
+     something starting with __ and the normal name is an alias.  */
+-#if defined __stub_$ac_func || defined __stub___$ac_func
+-choke me
+-#endif
+ 
+ int
+ main ()
+@@ -8803,7 +8776,7 @@
+ esac
+ 
+ # If we're using GNU nm, then use its standard symbol codes.
+-case `$NM -V 2>&1` in
++case `$NM --version 2>&1` in
+ *GNU* | *'with BFD'*)
+   symcode='[ABCDGIRSTW]' ;;
+ esac
+@@ -10036,14 +10009,14 @@
+   ac_status=$?
+   $as_echo "$as_me:$LINENO: \$? = $ac_status" >&5
+   (exit $ac_status); }
+-{ (ac_try="$ac_compiler -V >&5"
++{ (ac_try="$ac_compiler --version >&5"
+ case "(($ac_try" in
+   *\"* | *\`* | *\\*) ac_try_echo=\$ac_try;;
+   *) ac_try_echo=$ac_try;;
+ esac
+ eval ac_try_echo="\"\$as_me:$LINENO: $ac_try_echo\""
+ $as_echo "$ac_try_echo") >&5
+-  (eval "$ac_compiler -V >&5") 2>&5
++  (eval "$ac_compiler --version >&5") 2>&5
+   ac_status=$?
+   $as_echo "$as_me:$LINENO: \$? = $ac_status" >&5
+   (exit $ac_status); }
+@@ -10063,9 +10036,6 @@
+ int
+ main ()
+ {
+-#ifndef __GNUC__
+-       choke me
+-#endif
+ 
+   ;
+   return 0;
+@@ -10416,7 +10386,6 @@
+ #else
+ # include <assert.h>
+ #endif
+-		     Syntax error
+ _ACEOF
+ if { (ac_try="$ac_cpp conftest.$ac_ext"
+ case "(($ac_try" in
+@@ -10454,7 +10423,6 @@
+ cat confdefs.h >>conftest.$ac_ext
+ cat >>conftest.$ac_ext <<_ACEOF
+ /* end confdefs.h.  */
+-#include <ac_nonexistent.h>
+ _ACEOF
+ if { (ac_try="$ac_cpp conftest.$ac_ext"
+ case "(($ac_try" in
+@@ -10523,7 +10491,6 @@
+ #else
+ # include <assert.h>
+ #endif
+-		     Syntax error
+ _ACEOF
+ if { (ac_try="$ac_cpp conftest.$ac_ext"
+ case "(($ac_try" in
+@@ -10561,7 +10528,6 @@
+ cat confdefs.h >>conftest.$ac_ext
+ cat >>conftest.$ac_ext <<_ACEOF
+ /* end confdefs.h.  */
+-#include <ac_nonexistent.h>
+ _ACEOF
+ if { (ac_try="$ac_cpp conftest.$ac_ext"
+ case "(($ac_try" in
+@@ -10596,6 +10562,7 @@
+ done
+ # Because of `break', _AC_PREPROC_IFELSE's cleaning code was skipped.
+ rm -f conftest.err conftest.$ac_ext
++ac_preproc_ok=:
+ if $ac_preproc_ok; then
+   :
+ else
+@@ -11325,7 +11292,7 @@
+ 	lt_prog_compiler_static='-qstaticlink'
+ 	;;
+       *)
+-	case `$CC -V 2>&1 | sed 5q` in
++	case `$CC --version 2>&1 | sed 5q` in
+ 	*Sun\ C*)
+ 	  # Sun C 5.9
+ 	  lt_prog_compiler_pic='-KPIC'
+@@ -11879,7 +11846,7 @@
+ 	  tmp_sharedflag='-qmkshrobj'
+ 	  tmp_addflag= ;;
+ 	esac
+-	case `$CC -V 2>&1 | sed 5q` in
++	case `$CC --version 2>&1 | sed 5q` in
+ 	*Sun\ C*)			# Sun C 5.9
+ 	  whole_archive_flag_spec='${wl}--whole-archive`new_convenience=; for conv in $convenience\"\"; do test -z \"$conv\" || new_convenience=\"$new_convenience,$conv\"; done; $ECHO \"$new_convenience\"` ${wl}--no-whole-archive'
+ 	  compiler_needs_object=yes
+@@ -12028,7 +11995,7 @@
+       else
+ 	# If we're using GNU nm, then we don't want the "-C" option.
+ 	# -C means demangle to AIX nm, but means don't demangle with GNU nm
+-	if $NM -V 2>&1 | $GREP 'GNU' > /dev/null; then
++	if $NM --version 2>&1 | $GREP 'GNU' > /dev/null; then
+ 	  export_symbols_cmds='$NM -Bpg $libobjs $convenience | awk '\''{ if (((\$ 2 == "T") || (\$ 2 == "D") || (\$ 2 == "B")) && (substr(\$ 3,1,1) != ".")) { print \$ 3 } }'\'' | sort -u > $export_symbols'
+ 	else
+ 	  export_symbols_cmds='$NM -BCpg $libobjs $convenience | awk '\''{ if (((\$ 2 == "T") || (\$ 2 == "D") || (\$ 2 == "B")) && (substr(\$ 3,1,1) != ".")) { print \$ 3 } }'\'' | sort -u > $export_symbols'
+@@ -12601,7 +12568,7 @@
+ 	archive_expsym_cmds='echo "{ global:" > $lib.exp~cat $export_symbols | $SED -e "s/\(.*\)/\1;/" >> $lib.exp~echo "local: *; };" >> $lib.exp~
+ 	  $CC -shared ${wl}-z ${wl}text ${wl}-M ${wl}$lib.exp ${wl}-h ${wl}$soname -o $lib $libobjs $deplibs $compiler_flags~$RM $lib.exp'
+       else
+-	case `$CC -V 2>&1` in
++	case `$CC --version 2>&1` in
+ 	*"Compilers 5.0"*)
+ 	  wlarc=''
+ 	  archive_cmds='$LD -G${allow_undefined_flag} -h $soname -o $lib $libobjs $deplibs $linker_flags'
+@@ -13958,9 +13925,6 @@
+ /* The GNU C library defines this for functions which it implements
+     to always fail with ENOSYS.  Some functions are actually named
+     something starting with __ and the normal name is an alias.  */
+-#if defined __stub_shl_load || defined __stub___shl_load
+-choke me
+-#endif
+ 
+ int
+ main ()
+@@ -14114,9 +14078,6 @@
+ /* The GNU C library defines this for functions which it implements
+     to always fail with ENOSYS.  Some functions are actually named
+     something starting with __ and the normal name is an alias.  */
+-#if defined __stub_dlopen || defined __stub___dlopen
+-choke me
+-#endif
+ 
+ int
+ main ()
+@@ -15548,7 +15509,7 @@
+ 	    # version 8.0 and above of icpc choke on multiply defined symbols
+ 	    # if we add $predep_objects and $postdep_objects, however 7.1 and
+ 	    # earlier do not add the objects themselves.
+-	    case `$CC -V 2>&1` in
++	    case `$CC --version 2>&1` in
+ 	      *"Version 7."*)
+ 	        archive_cmds_CXX='$CC -shared $predep_objects $libobjs $deplibs $postdep_objects $compiler_flags ${wl}-soname $wl$soname -o $lib'
+ 		archive_expsym_cmds_CXX='$CC -shared $predep_objects $libobjs $deplibs $postdep_objects $compiler_flags ${wl}-soname $wl$soname ${wl}-retain-symbols-file $wl$export_symbols -o $lib'
+@@ -15569,7 +15530,7 @@
+ 	    ;;
+           pgCC* | pgcpp*)
+             # Portland Group C++ compiler
+-	    case `$CC -V` in
++	    case `$CC --version` in
+ 	    *pgCC\ [1-5]* | *pgcpp\ [1-5]*)
+ 	      prelink_cmds_CXX='tpldir=Template.dir~
+ 		rm -rf $tpldir~
+@@ -15631,7 +15592,7 @@
+ 	    fi
+ 	    ;;
+ 	  *)
+-	    case `$CC -V 2>&1 | sed 5q` in
++	    case `$CC --version 2>&1 | sed 5q` in
+ 	    *Sun\ C*)
+ 	      # Sun C++ 5.9
+ 	      no_undefined_flag_CXX=' -zdefs'
+@@ -16099,7 +16060,7 @@
+   ;;
+ 
+ linux*)
+-  case `$CC -V 2>&1 | sed 5q` in
++  case `$CC --version 2>&1 | sed 5q` in
+   *Sun\ C*)
+     # Sun C++ 5.9
+ 
+@@ -16383,7 +16344,7 @@
+ 	    lt_prog_compiler_static_CXX='-qstaticlink'
+ 	    ;;
+ 	  *)
+-	    case `$CC -V 2>&1 | sed 5q` in
++	    case `$CC --version 2>&1 | sed 5q` in
+ 	    *Sun\ C*)
+ 	      # Sun C++ 5.9
+ 	      lt_prog_compiler_pic_CXX='-KPIC'
+@@ -16746,7 +16707,7 @@
+   aix[4-9]*)
+     # If we're using GNU nm, then we don't want the "-C" option.
+     # -C means demangle to AIX nm, but means don't demangle with GNU nm
+-    if $NM -V 2>&1 | $GREP 'GNU' > /dev/null; then
++    if $NM --version 2>&1 | $GREP 'GNU' > /dev/null; then
+       export_symbols_cmds_CXX='$NM -Bpg $libobjs $convenience | awk '\''{ if (((\$ 2 == "T") || (\$ 2 == "D") || (\$ 2 == "B")) && (substr(\$ 3,1,1) != ".")) { print \$ 3 } }'\'' | sort -u > $export_symbols'
+     else
+       export_symbols_cmds_CXX='$NM -BCpg $libobjs $convenience | awk '\''{ if (((\$ 2 == "T") || (\$ 2 == "D") || (\$ 2 == "B")) && (substr(\$ 3,1,1) != ".")) { print \$ 3 } }'\'' | sort -u > $export_symbols'
+@@ -18282,7 +18243,7 @@
+   # Handling of the options.
+   -recheck | --recheck | --rechec | --reche | --rech | --rec | --re | --r)
+     ac_cs_recheck=: ;;
+-  --version | --versio | --versi | --vers | --ver | --ve | --v | -V )
++  --version | --versio | --versi | --vers | --ver | --ve | --v )
+     $as_echo "$ac_cs_version"; exit ;;
+   --debug | --debu | --deb | --de | --d | -d )
+     debug=: ;;

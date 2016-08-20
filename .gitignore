@@ -71,6 +71,10 @@ gcc-4.6.0
 make-gcc-4.6.0/*
 !make-gcc-4.6.0/*.sh
 !make-gcc-4.6.0/*.patch
+ppl-0.10
+make-ppl-0.10/*
+!make-ppl-0.10/*.sh
+!make-ppl-0.10/*.patch
 
 perl-5.6.1
 make-perl-5.6.1
