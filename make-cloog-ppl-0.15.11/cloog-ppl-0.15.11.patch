@@ -1,0 +1,105 @@
+diff -ur cloog-ppl-0.15.11/configure cloog-ppl-0.15.11.new/configure
+--- cloog-ppl-0.15.11/configure	2011-04-01 13:22:53.000000000 +0900
++++ cloog-ppl-0.15.11.new/configure	2016-08-20 20:27:40.836621025 +0900
+@@ -1228,7 +1228,7 @@
+   -v | -verbose | --verbose | --verbos | --verbo | --verb)
+     verbose=yes ;;
+ 
+-  -version | --version | --versio | --versi | --vers | -V)
++  -version | --version | --versio | --versi | --vers)
+     ac_init_version=: ;;
+ 
+   -with-* | --with-*)
+@@ -1866,9 +1866,6 @@
+ /* The GNU C library defines this for functions which it implements
+     to always fail with ENOSYS.  Some functions are actually named
+     something starting with __ and the normal name is an alias.  */
+-#if defined __stub_$2 || defined __stub___$2
+-choke me
+-#endif
+ 
+ int
+ main ()
+@@ -3231,7 +3228,7 @@
+ $as_echo "$as_me:${as_lineno-$LINENO}: checking for C compiler version" >&5
+ set X $ac_compile
+ ac_compiler=$2
+-for ac_option in --version -v -V -qversion; do
++for ac_option in --version -v; do
+   { { ac_try="$ac_compiler $ac_option >&5"
+ case "(($ac_try" in
+   *\"* | *\`* | *\\*) ac_try_echo=\$ac_try;;
+@@ -3513,9 +3510,6 @@
+ int
+ main ()
+ {
+-#ifndef __GNUC__
+-       choke me
+-#endif
+ 
+   ;
+   return 0;
+@@ -5636,7 +5630,7 @@
+ esac
+ 
+ # If we're using GNU nm, then use its standard symbol codes.
+-case `$NM -V 2>&1` in
++case `$NM --version 2>&1` in
+ *GNU* | *'with BFD'*)
+   symcode='[ABCDGIRSTW]' ;;
+ esac
+@@ -7598,7 +7592,7 @@
+ 	lt_prog_compiler_static='-qstaticlink'
+ 	;;
+       *)
+-	case `$CC -V 2>&1 | sed 5q` in
++	case `$CC --version 2>&1 | sed 5q` in
+ 	*Sun\ C*)
+ 	  # Sun C 5.9
+ 	  lt_prog_compiler_pic='-KPIC'
+@@ -8156,7 +8150,7 @@
+ 	  tmp_sharedflag='-qmkshrobj'
+ 	  tmp_addflag= ;;
+ 	esac
+-	case `$CC -V 2>&1 | sed 5q` in
++	case `$CC --version 2>&1 | sed 5q` in
+ 	*Sun\ C*)			# Sun C 5.9
+ 	  whole_archive_flag_spec='${wl}--whole-archive`new_convenience=; for conv in $convenience\"\"; do test -z \"$conv\" || new_convenience=\"$new_convenience,$conv\"; done; $ECHO \"$new_convenience\"` ${wl}--no-whole-archive'
+ 	  compiler_needs_object=yes
+@@ -8305,7 +8299,7 @@
+       else
+ 	# If we're using GNU nm, then we don't want the "-C" option.
+ 	# -C means demangle to AIX nm, but means don't demangle with GNU nm
+-	if $NM -V 2>&1 | $GREP 'GNU' > /dev/null; then
++	if $NM --version 2>&1 | $GREP 'GNU' > /dev/null; then
+ 	  export_symbols_cmds='$NM -Bpg $libobjs $convenience | awk '\''{ if (((\$ 2 == "T") || (\$ 2 == "D") || (\$ 2 == "B")) && (substr(\$ 3,1,1) != ".")) { print \$ 3 } }'\'' | sort -u > $export_symbols'
+ 	else
+ 	  export_symbols_cmds='$NM -BCpg $libobjs $convenience | awk '\''{ if (((\$ 2 == "T") || (\$ 2 == "D") || (\$ 2 == "B")) && (substr(\$ 3,1,1) != ".")) { print \$ 3 } }'\'' | sort -u > $export_symbols'
+@@ -8791,7 +8785,7 @@
+ 	archive_expsym_cmds='echo "{ global:" > $lib.exp~cat $export_symbols | $SED -e "s/\(.*\)/\1;/" >> $lib.exp~echo "local: *; };" >> $lib.exp~
+ 	  $CC -shared ${wl}-z ${wl}text ${wl}-M ${wl}$lib.exp ${wl}-h ${wl}$soname -o $lib $libobjs $deplibs $compiler_flags~$RM $lib.exp'
+       else
+-	case `$CC -V 2>&1` in
++	case `$CC --version 2>&1` in
+ 	*"Compilers 5.0"*)
+ 	  wlarc=''
+ 	  archive_cmds='$LD -G${allow_undefined_flag} -h $soname -o $lib $libobjs $deplibs $linker_flags'
+@@ -11222,9 +11216,6 @@
+ main ()
+ {
+ 
+-	#if PPL_VERSION_MAJOR != 0 || PPL_VERSION_MINOR < 10
+-	choke me
+-	#endif
+ 
+   ;
+   return 0;
+@@ -11915,7 +11906,7 @@
+   # Handling of the options.
+   -recheck | --recheck | --rechec | --reche | --rech | --rec | --re | --r)
+     ac_cs_recheck=: ;;
+-  --version | --versio | --versi | --vers | --ver | --ve | --v | -V )
++  --version | --versio | --versi | --vers | --ver | --ve | --v )
+     $as_echo "$ac_cs_version"; exit ;;
+   --config | --confi | --conf | --con | --co | --c )
+     $as_echo "$ac_cs_config"; exit ;;
